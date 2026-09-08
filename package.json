@@ -1,0 +1,64 @@
+{
+  "name": "mestre-das-tintas",
+  "version": "19.14.0",
+  "description": "Mestre das Tintas — Orçamentos e Compras",
+  "main": "main.js",
+  "author": "Mestre das Tintas",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis portable"
+  },
+  "dependencies": {
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "electron": "44.2.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "br.com.mestredastintas.orcamentos",
+    "productName": "Mestre das Tintas",
+    "artifactName": "Mestre-das-Tintas-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "app/**/*",
+      "icon.ico"
+    ],
+    "asar": true,
+    "icon": "icon.ico",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Mestre-das-Tintas-${version}-Setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "Mestre-das-Tintas-${version}-Portatil.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Mestre das Tintas",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true
+    }
+  }
+}

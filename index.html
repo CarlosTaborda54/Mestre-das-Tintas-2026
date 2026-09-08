@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2fc4"><meta name="description" content="Gestão de enxoval, produtos e fornecedores — Mestre das Tintas">
+<title>Gestão de Enxoval — Mestre das Tintas v19.10</title>
+<style>
+:root{--logoW:155px;--logoH:60px;--blue:#0b2fc4;--blue2:#071f8d;--orange:#ff5a00;--ink:#172033;--muted:#667085;--bg:#f4f7fb;--surface:#fff;--surface2:#f8f9fc;--line:#e4e8f0;--white:#fff;--green:#087443;--red:#c62828;--accent:#0b2fc4;--accentSoft:#eef2ff;--shadow:0 10px 30px rgba(15,31,70,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 4px 18px #0000000a}.brand{height:76px;display:flex;align-items:center;position:relative;padding:7px 22px;background:var(--surface)}.brand-mark{width:var(--logoW);height:var(--logoH);overflow:hidden;display:flex;align-items:center;justify-content:flex-start;flex:0 0 auto}.brand img{width:100%;height:100%;object-fit:contain;object-position:left center;display:block;border-radius:8px}.brand-title{position:absolute;left:50%;transform:translateX(-50%);margin:0;font-size:23px;max-width:55%;text-align:center;letter-spacing:.02em;font-weight:850;color:var(--ink);white-space:nowrap}.nav{max-width:1320px;margin:auto;padding:8px 22px;display:flex;gap:8px;align-items:center;overflow:auto}.nav button{border:0;background:transparent;padding:11px 16px;border-radius:10px;color:#475467;font-weight:700;cursor:pointer;white-space:nowrap}.nav button.active{background:var(--accentSoft);color:var(--accent)}.wrap{max-width:1320px;margin:auto;padding:24px 22px 50px}.page-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.page-head h1{margin:0 0 6px;font-size:28px}.page-head p{margin:0;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.head-search{width:260px;min-width:220px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}.head-search:focus{outline:2px solid #cdd8ff;border-color:var(--accent)}.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:11px 15px;border-radius:10px;cursor:pointer;font-weight:700}.btn:hover{transform:translateY(-1px);box-shadow:0 5px 12px #0000000c}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.orange{background:var(--orange);border-color:var(--orange);color:#fff}.btn.danger{background:var(--red);border-color:var(--red);color:#fff}.btn.ghost{background:var(--surface2)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat small{color:var(--muted);font-weight:600}.stat strong{display:block;font-size:25px;margin-top:7px}.toolbar{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;box-shadow:var(--shadow)}.search{flex:1;min-width:250px;padding:12px 14px;border:1px solid var(--line);border-radius:10px}.toolbar select{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:1040px;font-size:12px}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}th{background:var(--surface2);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#667085}.product{font-weight:800}.note{font-size:12px;color:var(--muted);line-height:1.45}.money,.qty{width:92px;padding:8px;border:1px solid var(--line);border-radius:8px}.total{font-weight:800;color:var(--accent);white-space:nowrap}.tax-detail{font-size:11px;color:var(--muted);line-height:1.35}.money.small{width:70px}.supplier-chip{display:flex;align-items:center;gap:9px;font-weight:700}.avatar{width:38px;height:38px;border-radius:10px;object-fit:cover;background:var(--accentSoft);display:grid;place-items:center;color:var(--accent);font-weight:900;flex:0 0 auto}.avatar.large{width:72px;height:72px;border-radius:16px}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--accentSoft);color:var(--accent);font-size:11px;font-weight:800}.footer{display:flex;justify-content:space-between;align-items:center;padding:15px;gap:10px;flex-wrap:wrap}.empty{padding:40px;text-align:center;color:var(--muted)}.tab{display:none}.tab.active{display:block}.supplier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.home-clients{margin-top:22px}.home-client-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.home-client-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;min-width:0}.home-client-card .client-info{min-width:0;flex:1}.home-client-card h3{margin:0 0 4px;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.home-client-card small{display:block;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.home-client-card .mini-actions{margin-top:8px;display:flex;gap:6px}.home-client-card .mini-actions .btn{padding:7px 9px;font-size:12px}.active-client-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--accentSoft);border:1px solid #cdd8ff;border-radius:14px;padding:12px 15px;margin:0 0 16px}.active-client-info{display:flex;align-items:center;gap:10px;min-width:0}.active-client-info strong{color:var(--accent)}.active-client-info span{color:#475467;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.client-select{min-width:280px;padding:11px 13px;border:1px solid #cdd8ff;border-radius:10px;background:var(--surface);color:#172033;font-weight:700}@media(max-width:1200px){.home-client-grid{grid-template-columns:repeat(3,1fr)}}.supplier-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.supplier-head{display:flex;gap:12px;align-items:center;margin-bottom:15px}.supplier-head h3{margin:0 0 4px;font-size:17px}.supplier-head small{color:var(--muted)}.supplier-data{display:grid;gap:8px;margin-bottom:15px}.data-row{display:flex;gap:8px;color:#475467;font-size:13px}.data-row strong{color:#172033;min-width:78px}.modal-backdrop{position:fixed;inset:0;background:rgba(7,18,48,.58);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal-backdrop.open{display:flex}.modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--surface);border-radius:20px;box-shadow:0 25px 80px #0005}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:21px}.close{border:0;background:#f2f4f7;border-radius:9px;width:38px;height:38px;cursor:pointer;font-size:20px}.modal-body{padding:20px}.modal-foot{display:flex;justify-content:flex-end;gap:9px;padding:15px 20px;border-top:1px solid var(--line)}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800;color:#475467}.field input,.field select,.field textarea{width:100%;border:1px solid #d7dce5;border-radius:10px;padding:11px 12px;background:var(--surface)}.field textarea{min-height:85px;resize:vertical}.photo-box{display:flex;gap:14px;align-items:center;padding:13px;border:1px dashed #cbd2df;border-radius:12px;background:var(--surface2)}.photo-preview{width:78px;height:78px;border-radius:14px;object-fit:cover;background:var(--accentSoft);display:grid;place-items:center;color:var(--accent);font-weight:900;overflow:hidden}.photo-preview img{width:100%;height:100%;object-fit:cover}.section-title{margin:22px 0 12px;font-size:18px}.condition{padding:13px 0;border-bottom:1px solid var(--line)}.condition:last-child{border-bottom:0}.pill-row{display:flex;gap:7px;flex-wrap:wrap}.hidden{display:none!important}.toast{position:fixed;right:18px;bottom:18px;background:#172033;color:#fff;padding:12px 16px;border-radius:10px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.2s;z-index:200}.toast.show{opacity:1;transform:translateY(0)}@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.supplier-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.brand{height:68px}.brand-mark{width:105px;height:50px}.brand-title{font-size:17px;left:57%;}.head-search{width:100%!important;min-width:0}.actions{width:100%}.actions .btn{flex:1}.brand{height:82px;padding:5px 10px}.brand-mark{height:72px;width:130px}.wrap{padding:18px 12px 40px}.page-head{display:block}.actions{margin-top:13px}.supplier-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{gap:9px}.stat{padding:14px}.stat strong{font-size:21px}}
+
+/* V15 — visual responsivo: mantém o desktop da V14 e adapta o celular sem trocar a identidade */
+.table-wrap{scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+@media(max-width:700px){
+  body{overflow-x:hidden}
+  .top{position:sticky;top:0}
+  .brand{height:72px;padding:4px 10px;gap:8px}
+  .brand img{width:92px;height:60px}
+  .brand-title{font-size:15px;left:auto;right:10px;transform:none;max-width:58%;white-space:normal;text-align:right;line-height:1.05}
+  .nav{padding:7px 10px;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .nav button{padding:10px 12px;font-size:12px;flex:0 0 auto;scroll-snap-align:start}
+  .nav .theme-toggle{min-width:max-content}
+  .wrap{padding:14px 10px 32px}
+  .page-head h1{font-size:23px}
+  .page-head p{font-size:12px;line-height:1.4}
+  .page-head>.actions{display:grid;grid-template-columns:1fr;gap:8px}
+  .page-head>.actions .head-search,.page-head>.actions select,.page-head>.actions .btn{width:100%!important;min-width:0}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .stat{padding:12px;border-radius:13px;min-width:0}
+  .stat small{font-size:10px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stat strong{font-size:18px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .active-client-bar{display:grid;grid-template-columns:1fr;gap:9px;padding:11px;border-radius:13px}
+  .active-client-bar .actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .active-client-bar .client-select{grid-column:1/-1;min-width:0;width:100%}
+  .active-client-bar .actions .btn{min-width:0;padding:10px 8px}
+  .toolbar{padding:9px;gap:7px;border-radius:13px}
+  .toolbar .search{min-width:0;width:100%;flex:1 1 100%}
+  .toolbar select,.toolbar .btn{flex:1 1 calc(50% - 7px);min-width:0;padding:10px 8px;font-size:12px}
+  .budget-status{width:100%;font-size:11px}
+  .card,.supplier-card,.home-client-card{border-radius:13px}
+  .table-wrap{overflow-x:auto}
+  table{min-width:760px;font-size:11px}
+  th,td{padding:8px 7px}
+  .table-wrap table th:first-child,.table-wrap table td:first-child{position:sticky;left:0;z-index:2;background:var(--surface);box-shadow:4px 0 8px rgba(15,31,70,.06)}
+  .table-wrap table th:first-child{background:var(--surface2)}
+  .footer{padding:12px}
+  .home-clients .page-head>.actions{margin-top:10px}
+  .home-client-grid{grid-template-columns:1fr;gap:9px}
+  .home-client-card{padding:11px}
+  .home-client-card .mini-actions{flex-wrap:wrap}
+  .home-client-card .mini-actions .btn{flex:1;min-width:120px}
+  .supplier-card{padding:14px}
+  .supplier-card .actions{display:grid;grid-template-columns:1fr;gap:7px}
+  .supplier-card .actions .btn{width:100%}
+  .supplier-head h3{font-size:16px;overflow-wrap:anywhere}
+  .data-row{font-size:12px;align-items:flex-start}
+  .data-row strong{min-width:70px}
+  .modal-backdrop{padding:8px}
+  .modal{width:100%;max-height:96vh;border-radius:16px}
+  .modal-head{padding:14px 15px;position:sticky;top:0;background:var(--surface);z-index:2}
+  .modal-body{padding:14px}
+  .modal-foot{padding:11px 14px;position:sticky;bottom:0;background:var(--surface);z-index:2}
+  .modal-foot .btn{flex:1}
+  .form-grid{gap:10px}
+  .photo-box{align-items:flex-start;flex-direction:column}
+  .photo-preview{width:86px;height:86px}
+  .import-map{grid-template-columns:1fr}
+  .import-preview{max-height:50vh}
+  .settings-grid{grid-template-columns:1fr!important}
+}
+@media(min-width:701px) and (max-width:1000px){
+  .supplier-grid{grid-template-columns:repeat(2,1fr)}
+  .home-client-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+.item-tools .hide-btn{background:#f5f7fa;border-color:#d7dce5;color:#344054}.item-tools .hide-btn:hover{background:#eef2f6}.item-tools .restore-btn{background:#eaf7ef;border-color:#b7e1c5;color:#087443}.hidden-row{display:none!important}.hidden-tag{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;background:#fff3cd;color:#8a5a00;font-size:10px;font-weight:800}
+@media print{.nav,.actions,.toolbar,.btn,.modal-backdrop,.item-tools{display:none!important}.top{position:static}.brand{height:90px}.brand img{height:80px}.wrap{padding:12px}.card{box-shadow:none}}
+
+
+.info-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.info-hint{padding:14px;border:1px dashed #cbd2df;border-radius:12px;background:var(--surface2);color:#475467}.equipment-thumb{width:52px;height:52px;object-fit:contain;background:#f4f6fa;border:1px solid var(--line);border-radius:10px;cursor:zoom-in;display:block}.product-cell{display:flex;gap:10px;align-items:center}.item-tools{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}.item-tools .btn{padding:6px 8px;font-size:11px}.hidden-row{opacity:.48;background:var(--surface)8f8}.hidden-tag{display:inline-block;margin-left:6px;padding:3px 6px;border-radius:999px;background:#fde8e8;color:#a61b1b;font-size:10px;font-weight:800}.tax-cell{white-space:nowrap}.obs-cell{min-width:150px;max-width:190px}.supplier-freight-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 12px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;margin-bottom:12px}.supplier-freight-chip{display:flex;align-items:center;gap:7px;padding:6px 8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;font-size:12px;font-weight:800}.supplier-freight-chip input{width:90px}.budget-status{font-size:12px;color:var(--muted);margin-left:auto}.info-layout{display:grid;grid-template-columns:300px 1fr;gap:16px}.info-photo-wrap{border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:center;min-height:280px}.info-photo{max-width:100%;max-height:360px;width:auto;height:auto;object-fit:contain;border-radius:12px}.info-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.info-fields .field textarea{min-height:180px}@media(max-width:800px){.info-layout{grid-template-columns:1fr}.info-fields{grid-template-columns:1fr}.supplier-freight-chip input{width:74px}}.client-whatsapp-btn{margin-top:7px}.hidden-search-note{color:var(--muted);font-size:12px;margin-left:auto}.hidden-products-panel{margin-bottom:12px;padding:14px}.hidden-products-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}.hidden-products-head strong{font-size:14px}.hidden-products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.hidden-product-card{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface2)}.hidden-product-card .hidden-product-info{min-width:0;flex:1}.hidden-product-card .hidden-product-info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hidden-product-card .hidden-product-info small{display:block;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hidden-product-card img{width:46px;height:46px;object-fit:contain;border-radius:9px;border:1px solid var(--line);background:var(--surface)}.hidden-product-card .btn{padding:7px 9px;font-size:11px}@media(max-width:780px){.hidden-products-grid{grid-template-columns:1fr}}
+@media(max-width:780px){.info-columns{grid-template-columns:1fr}}
+
+@media print{table{min-width:0;font-size:10px}th,td{padding:7px 6px}.equipment-thumb{width:34px;height:34px}.wrap{max-width:none}.note{font-size:10px}.pdf-page{display:block!important}.pdf-page *{box-sizing:border-box}.pdf-header{display:grid;grid-template-columns:180px 1fr 140px;align-items:center;gap:16px;border-bottom:3px solid var(--accent);padding:0 0 10px;margin-bottom:14px}.pdf-logo{width:170px;height:58px;overflow:hidden;display:flex;align-items:center}.pdf-logo img{width:100%;height:100%;object-fit:contain;object-position:left center}.pdf-title{text-align:center;font-size:24px;font-weight:900;color:var(--accent);white-space:nowrap}.pdf-date{text-align:right;font-size:9px;color:#667085}.pdf-client{display:grid;grid-template-columns:1fr 1fr;gap:5px 18px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--surface2);margin-bottom:14px}.pdf-client h2{grid-column:1/-1;margin:0 0 4px;color:var(--accent);font-size:16px}.pdf-client .full{grid-column:1/-1}.pdf-table{width:100%;border-collapse:collapse;table-layout:fixed}.pdf-table th{background:var(--accent);color:#fff;padding:7px 6px;font-size:9px}.pdf-table td{border-bottom:1px solid var(--line);padding:6px 5px;vertical-align:top;word-break:break-word}.pdf-table th:nth-child(1){width:4%}.pdf-table th:nth-child(2){width:28%}.pdf-table th:nth-child(3){width:7%}.pdf-table th:nth-child(4){width:11%}.pdf-table th:nth-child(5){width:7%}.pdf-table th:nth-child(6){width:7%}.pdf-table th:nth-child(7){width:11%}.pdf-table th:nth-child(8){width:25%}.pdf-table .c{text-align:center}.pdf-table .r{text-align:right}.pdf-table .strong{font-weight:900;color:var(--accent)}.pdf-muted{font-size:8px;color:#667085;margin-top:2px}.pdf-bottom{display:grid;grid-template-columns:1fr 320px;gap:14px;margin-top:12px}.pdf-box{border:1px solid var(--line);border-radius:8px;padding:9px}.pdf-box h3{margin:0 0 7px;font-size:11px;color:var(--accent)}.pdf-freight{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed var(--line)}.pdf-totals{border-top:2px solid var(--accent);padding-top:8px}.pdf-totals>div{display:flex;justify-content:space-between;padding:3px 0}.pdf-totals .grand{border-top:1px solid var(--line);margin-top:5px;padding-top:6px;font-size:15px;font-weight:900;color:var(--accent)}.pdf-foot{text-align:center;margin-top:12px;padding-top:6px;border-top:1px solid var(--line);font-size:8px;color:#98a2b3}}
+
+/* Tema escuro */
+.theme-toggle{margin-left:auto}
+body.dark{--bg:#0d1320;--ink:#edf2f7;--muted:#9aa6b8;--line:#273244;--white:#121a28;--shadow:0 12px 30px rgba(0,0,0,.25)}
+body.dark .top,body.dark .brand,body.dark .card,body.dark .stat,body.dark .toolbar,body.dark .supplier-card,body.dark .modal{background:#121a28;color:var(--ink)}
+body.dark .nav{background:#121a28}
+body.dark .nav button{color:#b9c4d4}
+body.dark .nav button.active{background:#1d2a45;color:#8fb0ff}
+body.dark th{background:#182235;color:#aab6c8}
+body.dark input,body.dark select,body.dark textarea,body.dark .head-search{background:#0f1725;color:var(--ink);border-color:#334155}
+body.dark .btn{background:#182235;color:var(--ink);border-color:#334155}
+body.dark .btn.primary{background:#315bdc;border-color:#315bdc;color:#fff}
+body.dark .btn.orange{background:#e85a12;border-color:#e85a12;color:#fff}
+body.dark .btn.danger{background:#b83232;border-color:#b83232;color:#fff}
+body.dark .btn.ghost{background:#182235}
+body.dark .photo-box{background:#0f1725;border-color:#3a475d}
+body.dark .photo-preview,.dark .avatar{background:#1d2a45}
+body.dark .modal-head,body.dark .modal-foot{border-color:var(--line)}
+body.dark .close{background:#1d2738;color:#edf2f7}
+body.dark .badge{background:#1d2a45;color:#9ab7ff}
+body.dark .data-row strong{color:#edf2f7}
+body.dark .toast{background:#edf2f7;color:#0d1320}
+
+/* v9 — backup, WhatsApp, equipamento */
+.btn.whatsapp{background:#25d366;border-color:#25d366;color:#fff}
+.item-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.item-tools .btn{padding:6px 9px;font-size:11px}
+.equipment-thumb{width:54px;height:54px;border-radius:10px;object-fit:cover;cursor:zoom-in;display:block;background:var(--accentSoft)}
+.zoom-layer{position:fixed;inset:0;background:rgba(0,0,0,.84);display:none;align-items:center;justify-content:center;padding:24px;z-index:300}.zoom-layer.open{display:flex}.zoom-layer img{max-width:95vw;max-height:92vh;object-fit:contain;box-shadow:0 25px 80px #0008;border-radius:10px}.zoom-close{position:absolute;right:20px;top:16px;border:0;background:var(--surface);color:#111;border-radius:10px;width:42px;height:42px;font-size:24px;cursor:pointer}
+.folder-panel{border:1px solid var(--line);border-radius:12px;background:var(--surface2);padding:12px;margin-top:10px}.folder-panel summary{cursor:pointer;font-weight:800;color:var(--ink)}.folder-panel textarea{margin-top:10px}
+.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.settings-box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}body.dark .settings-box,body.dark .folder-panel{background:#121a28;color:var(--ink)}
+@media(max-width:700px){.settings-grid{grid-template-columns:1fr}.item-tools .btn{flex:0 0 auto}.equipment-thumb{width:46px;height:46px}}
+
+body.theme-sand{--bg:#fbf7ef;--line:#e7dfd2}body.theme-slate{--bg:#eef2f6;--line:#d9e0e8}body.theme-blue{--bg:#edf4ff;--line:#d6e3f7}body.theme-green{--bg:#eef8f2;--line:#d6e9dc}body.theme-rose{--bg:#fff1f4;--line:#f0d6dc}.app-credit{font-size:11px;color:var(--muted);opacity:.7;text-align:center;margin:6px 0 0}
+/* v13.1 — tema integral + cores personalizadas */
+body.theme-sand{--bg:#fbf7ef;--surface:#fffdf8;--surface2:#f7f1e6;--line:#e7dfd2;--accent:#9a6b18;--accentSoft:#f4ead3}
+body.theme-slate{--bg:#eef2f6;--surface:#fdfefe;--surface2:#f2f5f8;--line:#d9e0e8;--accent:#52657a;--accentSoft:#e7edf3}
+body.theme-blue{--bg:#edf4ff;--surface:#fbfdff;--surface2:#eef5ff;--line:#d6e3f7;--accent:#2367c7;--accentSoft:#dfeaff}
+body.theme-green{--bg:#eef8f2;--surface:#fbfffc;--surface2:#edf7f0;--line:#d6e9dc;--accent:#247a53;--accentSoft:#dff1e7}
+body.theme-rose{--bg:#fff1f4;--surface:#fffafb;--surface2:#fff0f3;--line:#f0d6dc;--accent:#b14e6b;--accentSoft:#f8e1e8}
+body.custom-theme{--surface:var(--custom-surface,#fff);--surface2:var(--custom-surface2,#f3f6fb);--bg:var(--custom-bg,#f4f7fb);--line:var(--custom-line,#dce2ea);--ink:var(--custom-ink,#172033);--accent:var(--custom-accent,#0b2fc4);--accentSoft:var(--custom-soft,#eaf0ff)}
+body.custom-theme .top,body.custom-theme .brand,body.custom-theme .toolbar,body.custom-theme .card,body.custom-theme .stat,body.custom-theme .supplier-card,body.custom-theme .home-client-card,body.custom-theme .modal,body.custom-theme .active-client-bar,body.custom-theme .photo-box{background:var(--surface);}
+body.dark{--surface:#121a2a;--surface2:#182235;--bg:#0b1220;--ink:#edf2ff;--muted:#aab5ca;--line:#29344a;--accent:#7894ff;--accentSoft:#1f2b50}body.dark input,body.dark select,body.dark textarea{background:var(--surface2);color:var(--ink);border-color:var(--line)}
+.color-picker-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.color-picker-row input[type=color]{width:54px;height:40px;padding:0;border:0;background:transparent;cursor:pointer}.import-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.import-map .field{background:var(--surface2);padding:10px;border-radius:10px}.import-preview{max-height:360px;overflow:auto;border:1px solid var(--line);border-radius:12px}.import-preview table{min-width:760px}.info-photo-wrap{background:var(--surface2)!important}.info-fields .field textarea{background:var(--surface)!important}
+
+body.custom-theme .nav button,body.custom-theme .btn,body.custom-theme .badge,body.custom-theme .total,body.custom-theme .product,body.custom-theme .page-head h1,body.custom-theme .brand-title{color:var(--custom-accent)!important}
+body.custom-theme .btn.primary,body.custom-theme .nav button.active{background:var(--custom-accent)!important;border-color:var(--custom-accent)!important;color:#fff!important}
+body.custom-theme .btn.orange{background:var(--custom-accent)!important;border-color:var(--custom-accent)!important;color:#fff!important}
+body.custom-theme .btn.danger{filter:saturate(.8);}
+body.custom-theme th{background:var(--custom-surface2)!important;color:var(--custom-accent)!important}
+body.custom-theme input,body.custom-theme select,body.custom-theme textarea,body.custom-theme .head-search{border-color:var(--custom-line)!important}
+body.custom-theme .avatar,body.custom-theme .photo-preview{background:var(--custom-soft)!important;color:var(--custom-accent)!important}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><div class="brand-mark"><img src="logo-mark.png" alt="Mestre das Tintas"></div><h1 class="brand-title">Orçamentos e Compras</h1></div>
+  <nav class="nav">
+    <button class="nav-btn active" data-tab="dashboard">📊 Visão geral</button>
+    <button class="nav-btn" data-tab="products">📦 Produtos / Itens</button>
+    <button class="nav-btn" data-tab="suppliers">🏢 Fornecedores</button>
+    <button class="nav-btn" data-tab="conditions">📋 Condições</button><button class="nav-btn" data-tab="import">📥 Importar Excel</button>
+    <button class="nav-btn" data-tab="clients">👥 Novos clientes</button>
+    <button class="nav-btn" data-tab="backup">💾 Backup / Config.</button>
+    <button class="btn theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Modo escuro</button>
+  </nav>
+</header>
+<main class="wrap">
+<section id="dashboard" class="tab active">
+  <div class="page-head"><div><h1>Lista de Enxoval</h1><p>Barcarena — PA · gestão profissional de produtos, fornecedores e valores.</p></div><div class="actions"><button class="btn primary" onclick="openProduct()">＋ Novo produto</button><button class="btn orange" onclick="openSupplier()">＋ Novo fornecedor</button></div></div>
+  <div class="stats"><div class="stat"><small>Produtos cadastrados</small><strong id="count">0</strong></div><div class="stat"><small>Quantidade total</small><strong id="qtyTotal">0</strong></div><div class="stat"><small>Total estimado</small><strong id="grandTotal">R$ 0,00</strong></div><div class="stat"><small>Fornecedores</small><strong id="supCount">0</strong></div></div>
+  <div class="active-client-bar"><div class="active-client-info"><span>👤</span><strong>Cliente em trabalho:</strong><span id="activeClientName">Nenhum cliente selecionado</span></div><div class="actions"><select id="activeClientSelect" class="client-select"><option value="">Selecione um cliente...</option></select><button class="btn whatsapp" onclick="openActiveClientWhatsapp()">💬 WhatsApp</button><button class="btn" onclick="clearActiveClient()">Limpar</button></div></div>
+  <div class="toolbar"><input id="search" class="search" placeholder="🔎 Pesquisar produto ou fornecedor..."><select id="supplierFilter"><option value="">Todos os fornecedores</option></select><button class="btn primary" onclick="saveAsBackup()">💾 Salvar orçamento</button><button class="btn" style="background:#0b7a46;border-color:#0b7a46;color:#fff;font-weight:900" onclick="saveEverything()">💾 SALVAR TUDO</button><button class="btn primary" onclick="exportPDF()">⇩ Exportar PDF</button><button class="btn" onclick="toggleHiddenProducts()" id="hiddenToggle">👁 Ver ocultos</button><button class="btn" onclick="saveAsBackup()">💾 Salvar orçamento como</button><button class="btn" onclick="window.print()">🖨 Imprimir</button><span id="budgetStatus" class="budget-status">Nenhum orçamento selecionado</span></div><div id="supplierFreightBar" class="supplier-freight-bar"></div><div id="hiddenProductsPanel" class="card hidden-products-panel hidden"></div>
+  <div class="card"><div class="table-wrap"><table><thead><tr><th>Produto / Equipamento</th><th>Qtd.</th><th>Valor unit.</th><th>IPI (%)</th><th>ICMS (%)</th><th>Total do item</th><th>Fornecedor</th><th>Observações</th><th>Ações</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="footer"><strong id="footerTotal">Total: R$ 0,00</strong><span class="note">Frete é informado uma única vez por fornecedor e somado ao total do orçamento.</span></div></div>
+  <section class="home-clients"><div class="page-head"><div><h2 style="margin:0 0 6px;font-size:22px">👥 Todos os clientes</h2><p>Todos os clientes cadastrados aparecem aqui automaticamente.</p></div><div class="actions"><input id="homeClientSearch" class="head-search" placeholder="🔎 Buscar cliente..." aria-label="Buscar cliente na página inicial"><button class="btn primary" onclick="openClient()">＋ Novo cliente</button></div></div><div id="homeClientGrid" class="home-client-grid"></div></section>
+</section>
+<section id="products" class="tab">
+  <div class="page-head"><div><h1>Produtos / Itens</h1><p>Cadastre, altere e organize todos os produtos do enxoval.</p></div><div class="actions"><input id="productSearch" class="head-search" placeholder="🔎 Buscar produto..." aria-label="Buscar produto"><select id="productSupplierFilter" class="head-search" style="width:220px"><option value="">Todos os fornecedores</option></select><button class="btn primary" onclick="openProduct()">＋ Adicionar produto</button></div></div>
+  <div class="card"><div class="table-wrap"><table><thead><tr><th>Produto</th><th>Fornecedor</th><th>Qtd.</th><th>Valor unit.</th><th>IPI (%)</th><th>ICMS (%)</th><th>Total</th><th>Observações</th><th>Ações</th></tr></thead><tbody id="productBody"></tbody></table></div></div>
+</section>
+<section id="suppliers" class="tab">
+  <div class="page-head"><div><h1>Fornecedores</h1><p>Cada fornecedor possui uma ficha completa, foto e seus produtos vinculados.</p></div><div class="actions"><input id="supplierSearch" class="head-search" placeholder="🔎 Buscar fornecedor, CNPJ ou telefone..." aria-label="Buscar fornecedor"><button class="btn orange" onclick="openSupplier()">＋ Adicionar fornecedor</button></div></div>
+  <div id="supplierGrid" class="supplier-grid"></div>
+</section>
+<section id="clients" class="tab">
+  <div class="page-head"><div><h1>Novos Clientes</h1><p>Cada cliente é salvo individualmente e permanece separado dos próximos cadastros.</p></div><div class="actions"><input id="clientSearch" class="head-search" placeholder="🔎 Buscar cliente, CPF/CNPJ ou telefone..." aria-label="Buscar cliente"><button class="btn primary" onclick="openClient()">＋ Adicionar cliente</button></div></div>
+  <div id="clientGrid" class="supplier-grid"></div>
+</section>
+<section id="conditions" class="tab">
+  <div class="page-head"><div><h1>Condições por fabricante</h1><p>Informações comerciais importadas da planilha original.</p></div></div>
+  <div class="card" style="padding:18px" id="conditionsList"></div>
+</section>
+<section id="backup" class="tab">
+  <div class="page-head"><div><h1>Backup e configurações</h1><p>Escolha onde guardar seus arquivos, programe backups e configure o WhatsApp usado pelo app.</p></div></div>
+  <div class="settings-grid">
+    <div class="settings-box"><h2 style="margin-top:0">💾 Salvar e backup</h2><div class="actions"><button class="btn primary" onclick="saveAsBackup()">💾 Salvar como...</button><button class="btn" onclick="chooseBackupFolder()">📁 Escolher pasta de backup</button><button class="btn" onclick="backupNow()">⏱ Fazer backup agora</button></div><div class="note" style="margin-top:10px">Pasta escolhida: <strong id="backupFolderName">Nenhuma pasta selecionada</strong></div><div class="field" style="margin-top:14px"><label>Backup automático</label><select id="autoBackupInterval"><option value="0">Desativado</option><option value="5">A cada 5 minutos</option><option value="10">A cada 10 minutos</option><option value="15">A cada 15 minutos</option><option value="30">A cada 30 minutos</option><option value="60">A cada 60 minutos</option></select></div><div class="actions" style="margin-top:10px"><button class="btn orange" onclick="startAutoBackup()">▶ Ativar automático</button><button class="btn" onclick="stopAutoBackup()">⏹ Parar automático</button></div><div class="note" style="margin-top:10px">O backup automático funciona enquanto o app estiver aberto. Em navegadores compatíveis, ele grava diretamente na pasta selecionada.</div><div class="note" style="margin-top:10px">Último backup: <strong id="lastBackupAt">—</strong></div></div>
+    <div class="settings-box"><h2 style="margin-top:0">🎨 Aparência</h2><div class="field"><label>Tema</label><select id="bgTheme" onchange="applyBgTheme(this.value)"><option value="default">Azul claro</option><option value="sand">Areia</option><option value="slate">Cinza</option><option value="blue">Azul suave</option><option value="green">Verde suave</option><option value="rose">Rosado suave</option><option value="custom">Minha cor</option></select></div><div class="color-picker-row" style="margin-top:12px"><label for="customColor" style="font-weight:800">Escolher cor:</label><input id="customColor" type="color" value="#0b2fc4" onchange="applyCustomColor(this.value)"><span id="customColorHex" class="badge">#0b2fc4</span><button class="btn" onclick="resetCustomColor()">Voltar às cores</button></div><div class="note" style="margin-top:8px">A cor escolhida é aplicada de forma harmonizada no aplicativo inteiro.</div><div class="field" style="margin-top:12px"><label>Tamanho do logo</label><input id="logoSize" type="range" min="90" max="340" step="5" value="155" oninput="applyLogoSize(this.value)"><div class="note">Aumente ou reduza livremente. O logo não será cortado.</div></div></div>
+    <div class="settings-box"><h2 style="margin-top:0">📱 WhatsApp do app</h2><div class="field"><label>Número usado pelo botão WhatsApp</label><input id="globalWhatsapp" placeholder="Ex.: 5511999999999" inputmode="tel"></div><div class="note" style="margin-top:8px">Informe código do país + DDD, somente números.</div><div class="actions" style="margin-top:12px"><button class="btn whatsapp" onclick="saveGlobalWhatsapp()">💬 Salvar WhatsApp</button><button class="btn" onclick="testGlobalWhatsapp()">Testar botão</button></div><div class="note" style="margin-top:12px">Este número é usado apenas pelo botão de teste/configuração geral. O botão de WhatsApp do cliente sempre usa exclusivamente o número cadastrado na ficha daquele cliente.</div></div>
+  </div>
+</section>
+<section id="import" class="tab">
+  <div class="page-head"><div><h1>Importar Excel / Orçamento</h1><p>Importe o conteúdo da planilha para os respectivos lugares: clientes, fornecedores, produtos e orçamento individual.</p></div><div class="actions"><button type="button" class="btn primary" onclick="chooseExcelFile()">📥 Escolher Excel</button><button type="button" class="btn" onclick="clearImportPreview()">Limpar</button><input id="excelFallbackInput" type="file" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleExcelFallback(this)"></div></div>
+  <div class="card" style="padding:16px">
+    <div id="importStatus" class="note">Escolha uma planilha .xlsx, .xls ou .csv. O sistema tentará reconhecer automaticamente as colunas.</div>
+    <div id="importMapping" style="margin-top:14px"></div>
+    <div id="importPreview" class="import-preview" style="margin-top:14px"></div>
+    <div id="importActions" class="actions" style="margin-top:14px"></div>
+  </div>
+</section>
+<div class="app-credit">App criado por Carlos Taborda</div>
+</main>
+
+<div id="productModal" class="modal-backdrop"><div class="modal">
+  <div class="modal-head"><h2 id="productModalTitle">Novo produto</h2><button class="close" onclick="closeModal('productModal')">×</button></div>
+  <div class="modal-body"><form id="productForm"><input type="hidden" id="productId"><div class="form-grid">
+    <div class="field full"><label>Nome do produto / equipamento *</label><input id="productName" required></div>
+    <div class="field"><label>Categoria</label><input id="productCategory" placeholder="Ex.: Equipamentos, Brindes"></div>
+    <div class="field"><label>Fornecedor</label><select id="productSupplier"><option value="">Sem fornecedor</option></select></div>
+    <div class="field"><label>Quantidade</label><input id="productQty" type="number" min="0" step="1" value="1"></div>
+    <div class="field"><label>Valor unitário (R$)</label><input id="productUnit" type="number" min="0" step="0.01" placeholder="0,00"></div>
+        <div class="field"><label>IPI (%)</label><input id="productIpi" type="number" min="0" step="0.01" placeholder="0,00"></div>
+    <div class="field"><label>ICMS (%)</label><input id="productIcms" type="number" min="0" step="0.01" placeholder="0,00"></div>
+    <div class="field"><label>Valor / condição em texto</label><input id="productUnitText" placeholder="Ex.: 2.462,00 + parcelas"></div>
+    <div class="field full"><label>Foto do equipamento</label><div class="photo-box"><div class="photo-preview" id="productPhotoPreview">IMG</div><div><input id="productPhoto" type="file" accept="image/*"><div class="note" style="margin-top:6px">Clique na imagem para abrir junto com a foto, Como usar e Dados técnicos.</div></div></div></div>
+    <div class="field full"><label>Informações do equipamento</label><div class="info-hint">📷 Clique na foto do equipamento para abrir e editar <strong>Como usar</strong> e <strong>Dados técnicos</strong>.</div></div>
+    <div class="field full"><label>Observações</label><textarea id="productObs"></textarea></div>
+  </div></form></div>
+  <div class="modal-foot"><button class="btn" onclick="closeModal('productModal')">Cancelar</button><button class="btn primary" onclick="saveProduct()">Salvar produto</button></div>
+</div></div>
+
+<div id="supplierModal" class="modal-backdrop"><div class="modal">
+  <div class="modal-head"><h2 id="supplierModalTitle">Novo fornecedor</h2><button class="close" onclick="closeModal('supplierModal')">×</button></div>
+  <div class="modal-body"><form id="supplierForm" onsubmit="saveSupplier(); return false;"><input type="hidden" id="supplierId"><div class="form-grid">
+    <div class="field full"><label>Foto / logotipo do fornecedor</label><div class="photo-box"><div class="photo-preview" id="supplierPhotoPreview">LOGO</div><div><input id="supplierPhoto" type="file" accept="image/*"><div class="note" style="margin-top:6px">Escolha uma imagem. Ela aparecerá ao lado do nome do fornecedor.</div></div></div></div>
+    <div class="field full"><label>Razão social / Nome *</label><input id="supplierName" required></div>
+    <div class="field"><label>Nome fantasia</label><input id="supplierFantasy"></div>
+    <div class="field"><label>CNPJ</label><input id="supplierCnpj" placeholder="00.000.000/0000-00"></div>
+    <div class="field"><label>Telefone</label><input id="supplierPhone" placeholder="(00) 00000-0000"></div>
+    <div class="field"><label>WhatsApp</label><input id="supplierWhatsapp"></div>
+    <div class="field"><label>E-mail</label><input id="supplierEmail" type="email"></div>
+    <div class="field"><label>CEP</label><input id="supplierCep"></div>
+    <div class="field full"><label>Endereço</label><input id="supplierAddress"></div>
+    <div class="field"><label>Número</label><input id="supplierNumber"></div>
+    <div class="field"><label>Complemento</label><input id="supplierComplement"></div>
+    <div class="field"><label>Bairro</label><input id="supplierNeighborhood"></div>
+    <div class="field"><label>Cidade</label><input id="supplierCity"></div>
+    <div class="field"><label>Estado</label><input id="supplierState" maxlength="2"></div>
+    <div class="field"><label>Frete padrão do fornecedor (R$)</label><input id="supplierFreight" type="number" min="0" step="0.01" placeholder="0,00"></div>
+    <div class="field full"><label>Observações comerciais</label><textarea id="supplierNotes" placeholder="Prazo, forma de pagamento, representante, condições especiais etc."></textarea></div>
+  </div></form></div>
+  <div class="modal-foot"><button class="btn" onclick="closeModal('supplierModal')">Cancelar</button><button class="btn orange" onclick="saveSupplier()">Salvar fornecedor</button></div>
+</div></div>
+<div id="clientModal" class="modal-backdrop"><div class="modal">
+  <div class="modal-head"><h2 id="clientModalTitle">Novo cliente</h2><button class="close" onclick="closeModal('clientModal')">×</button></div>
+  <div class="modal-body"><form id="clientForm"><input type="hidden" id="clientId"><div class="form-grid">
+    <div class="field full"><label>Foto / logotipo do cliente</label><div class="photo-box"><div class="photo-preview" id="clientPhotoPreview">FOTO</div><div><input id="clientPhoto" type="file" accept="image/*"><div class="note" style="margin-top:6px">A foto aparecerá junto ao nome do cliente.</div></div></div></div>
+    <div class="field full"><label>Nome / Razão social *</label><input id="clientName" required></div>
+    <div class="field"><label>Nome fantasia</label><input id="clientFantasy"></div>
+    <div class="field"><label>CPF / CNPJ</label><input id="clientDoc" placeholder="CPF ou CNPJ"></div>
+    <div class="field"><label>Telefone</label><input id="clientPhone" placeholder="(00) 00000-0000"></div>
+    <div class="field"><label>WhatsApp</label><input id="clientWhatsapp"></div>
+    <div class="field"><label>E-mail</label><input id="clientEmail" type="email"></div>
+    <div class="field"><label>CEP</label><input id="clientCep"></div>
+    <div class="field full"><label>Endereço</label><input id="clientAddress"></div>
+    <div class="field"><label>Número</label><input id="clientNumber"></div>
+    <div class="field"><label>Complemento</label><input id="clientComplement"></div>
+    <div class="field"><label>Bairro</label><input id="clientNeighborhood"></div>
+    <div class="field"><label>Cidade</label><input id="clientCity"></div>
+    <div class="field"><label>Estado</label><input id="clientState" maxlength="2"></div>
+    <div class="field full"><label>Observações</label><textarea id="clientNotes" placeholder="Perfil do cliente, preferência, histórico, observações comerciais etc."></textarea></div>
+  </div></form></div>
+  <div class="modal-foot"><button class="btn" onclick="closeModal('clientModal')">Cancelar</button><button class="btn primary" onclick="saveClient()">Salvar cliente</button></div>
+</div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="importModal" class="modal-backdrop">
+  <div class="modal" style="width:min(1180px,100%)">
+    <div class="modal-head">
+      <h2>Pré-visualização da importação</h2>
+      <button class="close" onclick="closeModal('importModal')" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-body" id="importModalBody">
+      <div class="note">Nenhuma planilha carregada.</div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn" onclick="closeModal('importModal')">Cancelar</button>
+      <button type="button" class="btn primary" id="confirmImportBtn" onclick="confirmImport()">Importar dados</button>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" id="productInfoModal"><div class="modal" style="width:min(1120px,100%)"><div class="modal-head"><h2 id="productInfoModalTitle">Informações do equipamento</h2><button class="close" onclick="closeModal('productInfoModal')">×</button></div><div class="modal-body"><div class="info-layout"><div class="info-photo-wrap"><img id="productInfoImage" class="info-photo" alt="Foto do equipamento"></div><div class="info-fields"><div class="field"><label>Como usar</label><textarea id="productHowTo" placeholder="Orientações de uso, operação, cuidados e recomendações."></textarea></div><div class="field"><label>Dados técnicos</label><textarea id="productTech" placeholder="Tensão, potência, capacidade, dimensões, garantia e demais especificações."></textarea></div></div></div></div><div class="modal-foot"><button class="btn" onclick="closeModal('productInfoModal')">Fechar</button><button class="btn primary" onclick="saveProductInfo()">Salvar informações</button></div></div></div><div id="zoomLayer" class="zoom-layer" onclick="closeZoom(event)"><button class="zoom-close" onclick="closeZoom(event)">×</button><img id="zoomImage" alt="Imagem ampliada"></div>
+<script>
+const initialItems=[
+{"id":4,"name":"LIXADEIRA Ø150 ORBITAL 5.0 V2350W/220V","qty":1,"unit":1173.37,"obs":"Condição de pagamento: 028/035/042 DD","supplier":"ATLAS / NAUBER"},
+{"id":5,"name":"LIXADEIRA ELETR. Ø180850W/220V","qty":1,"unit":538.66,"obs":"","supplier":"ATLAS / NAUBER"},
+{"id":6,"name":"LIXADEIRA ELETR TELE Ø225750W/220V","qty":1,"unit":945.73,"obs":"","supplier":"ATLAS / NAUBER"},
+{"id":7,"name":"ASPIRADOR/EXTR. DE PO ELETR. 1600W/220V","qty":1,"unit":1586.92,"obs":"","supplier":"ATLAS / NAUBER"},
+{"id":8,"name":"MAQ. PINTURA AIRLESS ELETR. 1100W/220V","qty":1,"unit":2570.93,"obs":"","supplier":"ATLAS / NAUBER"},
+{"id":9,"name":"itens venda ATLAS","qty":1,"unit":13008.12,"obs":"a vista antecipado","supplier":"ATLAS / NAUBER"},
+{"id":10,"name":"Dosadora + notebook + impressora + agitador","qty":1,"unit":null,"unitText":"2462,00 + PARCELAS","obs":"","supplier":"PERCOLORE - SUVINIL"},
+{"id":11,"name":"FUNDO PREPARADOR,VERNIZ,SELADOR,TEXTURA...","qty":1,"unit":40938.68,"obs":"","supplier":"SUVINIL"},
+{"id":12,"name":"Fundo,manta,resina,borracha liquida,selador tinta para piso...","qty":1,"unit":75000,"obs":"","supplier":"ALESSI"}
+];
+const defaultSuppliers=[
+{"id":"sup-atlas","name":"ATLAS / NAUBER","fantasy":"ATLAS / NAUBER","cnpj":"","phone":"","whatsapp":"","email":"","cep":"","address":"","number":"","complement":"","neighborhood":"","city":"","state":"","notes":"Fornecedor importado da planilha original.","photo":""},
+{"id":"sup-percolore","name":"PERCOLORE - SUVINIL","fantasy":"PERCOLORE - SUVINIL","cnpj":"","phone":"","whatsapp":"","email":"","cep":"","address":"","number":"","complement":"","neighborhood":"","city":"","state":"","notes":"Instalação de R$ 2.462,00 nas 3 primeiras parcelas + mensalidade de R$ 1.662,00 a partir da 4ª.","photo":""},
+{"id":"sup-suvinil","name":"SUVINIL","fantasy":"SUVINIL","cnpj":"","phone":"","whatsapp":"","email":"","cep":"","address":"","number":"","complement":"","neighborhood":"","city":"","state":"","notes":"Fornecedor importado da planilha original.","photo":""},
+{"id":"sup-alessi","name":"ALESSI","fantasy":"ALESSI","cnpj":"","phone":"","whatsapp":"","email":"","cep":"","address":"","number":"","complement":"","neighborhood":"","city":"","state":"","notes":"Fornecedor importado da planilha original.","photo":""}
+];
+let items=JSON.parse(localStorage.getItem('mdo_items')||'null')||initialItems;
+let __persistedAppData={};
+try{if(window.electronAPI?.loadAppData){const raw=window.electronAPI.loadAppData();if(raw)__persistedAppData=JSON.parse(raw)||{}}}catch(e){__persistedAppData={}}
+try{
+  if(window.electronAPI?.loadLastExternal){
+    const rawExt=window.electronAPI.loadLastExternal();
+    if(rawExt){
+      const ext=JSON.parse(rawExt)||{};
+      if(ext.fullBackup){
+        const fb=ext.fullBackup;
+        if(fb.masterItems)__persistedAppData.masterItems=fb.masterItems;
+        if(fb.budgets)__persistedAppData.budgets=fb.budgets;
+        if(fb.suppliers)__persistedAppData.suppliers=fb.suppliers;
+        if(fb.clients)__persistedAppData.clients=fb.clients;
+        if(fb.activeClientId!==undefined)__persistedAppData.activeClientId=fb.activeClientId;
+        if(fb.conditions)try{localStorage.setItem('mdo_conditions',JSON.stringify(fb.conditions));}catch(e){}
+        if(fb.appearance){
+          const ap=fb.appearance;
+          try{
+            if(ap.theme)localStorage.setItem('mdo_theme',ap.theme);
+            if(ap.bg)localStorage.setItem('mdo_bg_theme',ap.bg);
+            if(ap.customColor)localStorage.setItem('mdo_custom_color',ap.customColor);
+            if(ap.logoSize)localStorage.setItem('mdo_logo_size',String(ap.logoSize));
+            if(ap.globalWhatsapp)localStorage.setItem('mdo_global_whatsapp',ap.globalWhatsapp);
+          }catch(e){}
+        }
+      }
+      if(ext.budgets){
+        __persistedAppData.budgets=__persistedAppData.budgets||{};
+        for(const [cid,payload] of Object.entries(ext.budgets)){
+          if(payload&&payload.items){
+            __persistedAppData.budgets[cid]={items:payload.items,supplierFreights:payload.supplierFreights||{},savedAt:payload.savedAt||null};
+          }
+        }
+      }
+    }
+  }
+}catch(e){}
+const __stored=(key,fallback)=>{const v=__persistedAppData[key];if(v!==undefined&&v!==null)return v;try{const x=localStorage.getItem(key);return x===null?fallback:JSON.parse(x)}catch(e){return fallback}};
+let masterItems=__stored('masterItems',JSON.parse(localStorage.getItem('mdo_master_items')||'null'))||items;
+let budgets=__stored('budgets',JSON.parse(localStorage.getItem('mdo_client_budgets')||'{}'))||{};
+let suppliers=__stored('suppliers',JSON.parse(localStorage.getItem('mdo_suppliers')||'null'))||defaultSuppliers;
+let clients=__stored('clients',JSON.parse(localStorage.getItem('mdo_clients')||'null'))||[];
+let activeClientId=localStorage.getItem('mdo_active_client')||'';
+let showHiddenProducts=false;
+let currentInfoProductId=null;
+let backupFolderHandle=null;let autoBackupTimer=null;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const brl=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(n)||0);const num=v=>{if(typeof v==='number')return Number.isFinite(v)?v:0;let s=String(v??'').trim();if(!s)return 0;s=s.replace(/R\$\s?/gi,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.\-]/g,'');const n=parseFloat(s);return Number.isFinite(n)?n:0};
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const $=id=>document.getElementById(id);
+function normalizeItem(x){return {...x,qty:num(x.qty),unit:x.unit==null||x.unit===''?null:num(x.unit),ipi:num(x.ipi),icms:num(x.icms),whatsapp:x.whatsapp||'',photo:x.photo||'',howTo:x.howTo||'',tech:x.tech||'',category:x.category||'',details:x.details||'',hidden:Boolean(x.hidden)} }
+masterItems=(masterItems||[]).map(normalizeItem).map(x=>({...x,hidden:false}));
+suppliers=(suppliers||[]).map(s=>({...s,freight:num(s.freight)}));
+for(const s of suppliers){if(!num(s.freight)){const oldFreight=masterItems.find(x=>x.supplier===s.name&&num(x.freight)>0)?.freight;if(oldFreight)s.freight=num(oldFreight)}}
+for(const [id,b] of Object.entries(budgets)){budgets[id]={items:(b.items||masterItems).map(normalizeItem),supplierFreights:b.supplierFreights||{},savedAt:b.savedAt||null};}
+function currentBudget(){return activeClientId?budgets[activeClientId]||null:null}
+function applyCurrentClient(){const b=currentBudget();items=b?clone(b.items):clone(masterItems)}
+applyCurrentClient();
+function persistCurrentState(){if(activeClientId){const old=budgets[activeClientId]||{supplierFreights:{}};budgets[activeClientId]={items:clone(items),supplierFreights:old.supplierFreights||{},savedAt:old.savedAt||null}}else{masterItems=clone(items).map(x=>({...x,hidden:false}))}}
+function saveAll(){
+  persistCurrentState();
+  const payload={version:14,savedAt:new Date().toISOString(),masterItems,budgets,suppliers,clients,activeClientId};
+  try{localStorage.setItem('mdo_master_items',JSON.stringify(masterItems));localStorage.setItem('mdo_items',JSON.stringify(masterItems));localStorage.setItem('mdo_client_budgets',JSON.stringify(budgets));localStorage.setItem('mdo_suppliers',JSON.stringify(suppliers));localStorage.setItem('mdo_clients',JSON.stringify(clients));}catch(e){}
+  let persisted=true;
+  try{if(window.electronAPI?.saveAppData){persisted=window.electronAPI.saveAppData(JSON.stringify(payload))!==false;}}catch(e){persisted=false}
+  if(activeClientId)localStorage.setItem('mdo_active_client',activeClientId);else localStorage.removeItem('mdo_active_client')
+  return persisted;
+}
+function saveBudget(){if(!activeClientId){toast('Selecione um cliente em trabalho para salvar o orçamento.');return}persistCurrentState();const b=budgets[activeClientId]||{};b.items=clone(items);b.supplierFreights=b.supplierFreights||{};b.savedAt=new Date().toISOString();budgets[activeClientId]=b;saveAll();toast('Orçamento deste cliente salvo separadamente.')}
+function loadBudgetForClient(id){const b=budgets[id];items=b?clone(b.items):clone(masterItems);if(!b){budgets[id]={items:clone(items),supplierFreights:{},savedAt:null}}}
+function supplierByName(name){return suppliers.find(s=>s.name===name)||suppliers.find(s=>s.fantasy===name)}
+function getSupplierFreight(name){const b=currentBudget();if(b&&Object.prototype.hasOwnProperty.call(b.supplierFreights||{},name))return num(b.supplierFreights[name]);return num(supplierByName(name)?.freight)}
+function setSupplierFreight(name,value){const v=num(value);const b=currentBudget();if(b){b.supplierFreights=b.supplierFreights||{};b.supplierFreights[name]=v;budgets[activeClientId]=b}else{const s=supplierByName(name);if(s)s.freight=v}saveAll();renderDashboard();renderProducts();renderStats();}
+function productAmounts(x){const base=num(x.qty)*num(x.unit);const ipi=base*num(x.ipi)/100;const icms=base*num(x.icms)/100;return {base,ipi,icms,total:base+ipi+icms};}
+function freightTotal(){const names=[...new Set(items.filter(x=>!x.hidden&&x.supplier).map(x=>x.supplier))];return names.reduce((a,n)=>a+getSupplierFreight(n),0)}
+items=items.map(normalizeItem);
+function avatarHTML(s,large=false){const size=large?'large':'';return s&&s.photo?`<img class="avatar ${size}" src="${s.photo}" alt="">`:`<div class="avatar ${size}">${esc((s?.name||'?').slice(0,2).toUpperCase())}</div>`}
+function populateSupplierSelects(){const opts='<option value="">Sem fornecedor</option>'+suppliers.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');$('productSupplier').innerHTML=opts; const filters='<option value="">Todos os fornecedores</option>'+suppliers.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');$('supplierFilter').innerHTML=filters;$('productSupplierFilter').innerHTML=filters}
+function populateClientSelector(){const sel=$('activeClientSelect');if(!sel)return;const current=activeClientId;sel.innerHTML='<option value="">Selecione um cliente...</option>'+clients.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}${c.doc?' · '+esc(c.doc):''}</option>`).join('');sel.value=clients.some(c=>c.id===current)?current:'';renderActiveClient()}
+function renderActiveClient(){const c=clients.find(x=>x.id===activeClientId);$('activeClientName').textContent=c?`${c.name}${c.fantasy?' · '+c.fantasy:''}`:'Nenhum cliente selecionado';if($('activeClientSelect'))$('activeClientSelect').value=c?c.id:'';if($('budgetStatus'))$('budgetStatus').textContent=c?`Orçamento: ${c.name}${budgets[c.id]?.savedAt?' · salvo':' · não salvo'}`:'Nenhum orçamento selecionado'}
+function selectClient(id){const c=clients.find(x=>x.id===id);if(!c)return;persistCurrentState();activeClientId=c.id;loadBudgetForClient(c.id);saveAll();populateClientSelector();refresh();toast('Cliente selecionado: '+c.name)}
+function clearActiveClient(){persistCurrentState();activeClientId='';items=clone(masterItems);localStorage.removeItem('mdo_active_client');populateClientSelector();refresh();toast('Cliente de trabalho removido.')}
+function renderStats(){const activeItems=items.filter(x=>!x.hidden);const sums=activeItems.reduce((a,x)=>{const p=productAmounts(x);a.base+=p.base;a.ipi+=p.ipi;a.icms+=p.icms;a.total+=p.total;return a},{base:0,ipi:0,icms:0,total:0});const total=sums.total+freightTotal();$('count').textContent=activeItems.length;$('qtyTotal').textContent=activeItems.reduce((a,x)=>a+Number(x.qty||0),0);$('grandTotal').textContent=brl(total);$('footerTotal').textContent='Total: '+brl(total)+' · Base: '+brl(sums.base)+' · IPI: '+brl(sums.ipi)+' · ICMS: '+brl(sums.icms)+' · Fretes: '+brl(freightTotal());$('supCount').textContent=suppliers.length}
+function renderSupplierFreightBar(){
+ const names=[...new Set(items.filter(x=>!x.hidden&&x.supplier).map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b));
+ const el=$('supplierFreightBar'); if(!el)return;
+ if(!names.length){el.innerHTML='<span class="note">Adicione fornecedores aos itens para informar o frete uma única vez por fornecedor.</span>';return;}
+ const options=suppliers.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');
+ el.innerHTML='<strong>🚚 Frete por fornecedor:</strong>'+names.map((n,i)=>`<div class="supplier-freight-chip"><select class="supplier-freight-name" data-index="${i}" onchange="renameSupplierFreight(${i},this.value)"><option value="">Fornecedor</option>${options}</select><input class="money small" type="number" min="0" step="0.01" value="${num(getSupplierFreight(n))}" onchange="setSupplierFreight('${esc(n)}',this.value)" title="Frete deste fornecedor neste orçamento"></div>`).join('')+'<span class="note">Cada fornecedor aparece uma única vez.</span>';
+ document.querySelectorAll('.supplier-freight-name').forEach((sel,i)=>sel.value=names[i]);
+}
+function renameSupplierFreight(index,newName){const names=[...new Set(items.filter(x=>!x.hidden&&x.supplier).map(x=>x.supplier))].sort((a,b)=>a.localeCompare(b));const oldName=names[index];if(!oldName||!newName||oldName===newName)return;const b=currentBudget();if(!b)return;b.supplierFreights=b.supplierFreights||{};if(Object.prototype.hasOwnProperty.call(b.supplierFreights,oldName)){b.supplierFreights[newName]=b.supplierFreights[oldName];delete b.supplierFreights[oldName]}items.forEach(x=>{if(x.supplier===oldName)x.supplier=newName});saveBudget();refresh();toast('Fornecedor do frete atualizado.')}
+
+function renderDashboard(){const q=$('search').value.toLowerCase(),s=$('supplierFilter').value;const rows=items.filter(x=>(showHiddenProducts||!x.hidden)&&(x.name+' '+x.supplier+' '+x.obs).toLowerCase().includes(q)&&(!s||x.supplier===s));$('tbody').innerHTML=rows.length?rows.map(productRow).join(''):'<tr><td colspan="9" class="empty">Nenhum item encontrado.</td></tr>';renderHomeClients();renderSupplierFreightBar();renderStats();renderActiveClient()}
+function renderHomeClients(){const q=($('homeClientSearch')?.value||'').toLowerCase();const list=clients.filter(c=>(c.name+' '+c.fantasy+' '+c.doc+' '+c.phone+' '+c.whatsapp+' '+c.email).toLowerCase().includes(q));const grid=$('homeClientGrid');if(!grid)return;grid.innerHTML=list.length?list.map(c=>`<article class="home-client-card">${clientAvatarHTML(c,true)}<div class="client-info"><h3 title="${esc(c.name)}">${esc(c.name)}</h3><small>${esc(c.fantasy||c.doc||'Cliente')}</small><div class="mini-actions"><button class="btn primary" onclick="selectClient('${c.id}')">Trabalhar</button><button class="btn whatsapp" onclick="openClientWhatsapp('${c.id}')">💬 WhatsApp</button><button class="btn" onclick="openClient('${c.id}')">Editar</button></div></div></article>`).join(''):'<div class="card empty" style="grid-column:1/-1">Nenhum cliente cadastrado ainda. Clique em “Novo cliente” para adicionar o primeiro.</div>'}
+function productRow(x){
+ const s=supplierByName(x.supplier);const a=productAmounts(x);const img=x.photo?`<img class="equipment-thumb" src="${x.photo}" alt="" onclick="openProductInfo(${x.id})">`:'';const hidden=Boolean(x.hidden);
+ const action=hidden
+   ? `<button class="btn restore-btn" type="button" onclick="restoreProduct(${x.id})">↩ Restaurar</button>`
+   : `<button class="btn hide-btn" type="button" onclick="hideProduct(${x.id})">🚫 Ocultar</button>`;
+ return `<tr data-product-row="${x.id}" class="${hidden?'hidden-row':''}"><td><div class="product-cell">${img}<div><div class="product">${esc(x.name)} ${hidden?'<span class="hidden-tag">FORA DO ORÇAMENTO</span>':''}</div><div class="note">Código interno: ${x.id}</div><div class="item-tools"><button class="btn" type="button" onclick="openProduct(${x.id})">✏️ Editar</button>${x.photo?'<button class="btn" type="button" onclick="openProductInfo('+x.id+')">📷 Foto / uso / técnico</button>':''}${action}</div></div></div></td><td><input class="qty" type="number" min="0" step="1" value="${num(x.qty)}" oninput="liveUpdate(${x.id},'qty',this.value)" onchange="quickUpdate(${x.id},'qty',this.value)"></td><td>${x.unit!=null?`<input class="money" type="number" min="0" step="0.01" value="${num(x.unit)}" oninput="liveUpdate(${x.id},'unit',this.value)" onchange="quickUpdate(${x.id},'unit',this.value)">`:`<span class="badge">${esc(x.unitText||'A consultar')}</span>`}</td><td class="tax-cell">${x.unit!=null?`<input class="money small" type="number" min="0" step="0.01" value="${num(x.ipi)}" oninput="liveUpdate(${x.id},'ipi',this.value)" onchange="quickUpdate(${x.id},'ipi',this.value)"> %<div class="tax-detail live-ipi">${brl(a.ipi)}</div>`:'—'}</td><td class="tax-cell">${x.unit!=null?`<input class="money small" type="number" min="0" step="0.01" value="${num(x.icms)}" oninput="liveUpdate(${x.id},'icms',this.value)" onchange="quickUpdate(${x.id},'icms',this.value)"> %<div class="tax-detail live-icms">${brl(a.icms)}</div>`:'—'}</td><td class="total live-total">${x.unit!=null?brl(a.total):'—'}${x.unit!=null?`<div class="tax-detail live-breakdown">Qtd.: ${num(x.qty)} × Unit.: ${brl(x.unit)}<br>Base: ${brl(a.base)} · IPI: ${brl(a.ipi)} · ICMS: ${brl(a.icms)}</div>`:''}</td><td><div class="supplier-chip">${avatarHTML(s)}<span>${esc(x.supplier||'Sem fornecedor')}</span></div></td><td class="note obs-cell">${esc(x.obs)}</td></tr>`
+}
+
+let conditions=JSON.parse(localStorage.getItem('mdo_conditions')||'null')||[['ALESSI','Frete FOB (cotar) · prazo de entrega de 20 a 30 dias','À vista — frete FOB'],['SUVINIL','Prazo de entrega de 5 dias','À vista'],['HYDRONORTH','','À vista'],['NAUBER','','À vista'],['ATLAS','','À vista'],['EUCATEX','','À vista'],['PERCOLORE','Instalação de R$ 2.462,00 nas 3 primeiras parcelas + mensalidade de R$ 1.662,00 a partir da 4ª · prazo de entrega 30 dias','Parcelado — fidelidade 1 ano']];
+function renderConditions(){const el=$('conditionsList');el.innerHTML=conditions.map((c,i)=>`<div class="condition"><div class="form-grid"><div class="field"><label>Fabricante</label><input value="${esc(c[0])}" oninput="conditions[${i}][0]=this.value"></div><div class="field"><label>Condição</label><input value="${esc(c[2]||'')}" oninput="conditions[${i}][2]=this.value"></div><div class="field full"><label>Observações / prazo / frete</label><textarea oninput="conditions[${i}][1]=this.value">${esc(c[1]||'')}</textarea></div></div></div>`).join('')+`<div class="actions" style="margin-top:15px"><button class="btn primary" onclick="saveConditions()">💾 Salvar condições</button><button class="btn" onclick="conditions.push(['Novo fabricante','','']);renderConditions()">＋ Nova condição</button></div>`}
+function saveConditions(){localStorage.setItem('mdo_conditions',JSON.stringify(conditions));toast('Condições salvas.')}
+
+function renderProducts(){const q=$('productSearch').value.toLowerCase(),s=$('productSupplierFilter').value;const rows=items.filter(x=>(showHiddenProducts||!x.hidden)&&x.name.toLowerCase().includes(q)&&(!s||x.supplier===s));$('productBody').innerHTML=rows.length?rows.map(productRow).join(''):'<tr><td colspan="9" class="empty">Nenhum produto encontrado.</td></tr>'}
+function renderSuppliers(){const q=$('supplierSearch').value.toLowerCase();const list=suppliers.filter(s=>(s.name+' '+s.fantasy+' '+s.cnpj+' '+s.phone).toLowerCase().includes(q));$('supplierGrid').innerHTML=list.length?list.map(s=>{const count=items.filter(x=>x.supplier===s.name).length;return `<article class="supplier-card"><div class="supplier-head">${avatarHTML(s,true)}<div><h3>${esc(s.name)}</h3><small>${esc(s.fantasy||'Fornecedor')}</small></div></div><div class="supplier-data"><div class="data-row"><strong>CNPJ</strong><span>${esc(s.cnpj||'Não informado')}</span></div><div class="data-row"><strong>Telefone</strong><span>${esc(s.phone||'Não informado')}</span></div><div class="data-row"><strong>WhatsApp</strong><span>${esc(s.whatsapp||'Não informado')}</span></div><div class="data-row"><strong>E-mail</strong><span>${esc(s.email||'Não informado')}</span></div><div class="data-row"><strong>Endereço</strong><span>${esc(fullAddress(s)||'Não informado')}</span></div><div class="data-row"><strong>Produtos</strong><span>${count} item(ns) vinculado(s)</span></div><div class="data-row"><strong>Frete padrão</strong><span>${brl(s.freight)}</span></div></div><div class="note" style="min-height:34px">${esc(s.notes||'')}</div><div class="actions" style="margin-top:14px"><button class="btn primary" onclick="editSupplierName('${s.id}')">✏️ Alterar nome</button><button class="btn" onclick="openSupplier('${s.id}')">Editar ficha</button><button class="btn danger" onclick="deleteSupplier('${s.id}')">Excluir</button></div></article>`}).join(''):'<div class="card empty" style="grid-column:1/-1">Nenhum fornecedor encontrado.</div>'}
+function fullAddress(s){return [s.address,s.number,s.complement,s.neighborhood,s.city,s.state,s.cep].filter(Boolean).join(', ')}
+function refresh(){populateSupplierSelects();renderDashboard();renderProducts();renderSuppliers();renderClients();renderConditions();renderActiveClient();renderHiddenProductsPanel()}
+function openTab(tab){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));$(tab).classList.add('active');document.querySelector(`[data-tab="${tab}"]`).classList.add('active')}
+document.querySelectorAll('.nav-btn').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));
+function closeModal(id){const el=$(id);if(el)el.classList.remove('open')}
+function openModal(id){const el=$(id);if(el)el.classList.add('open')}
+function openProduct(id=null){populateSupplierSelects();$('productForm').reset();$('productId').value=id||'';$('productPhotoPreview').innerHTML='IMG';delete $('productPhotoPreview').dataset.src;if(id){const x=items.find(i=>i.id===id)||masterItems.find(i=>i.id===id);if(!x)return;$('productModalTitle').textContent='Editar produto';$('productName').value=x.name;$('productSupplier').value=x.supplier||'';$('productQty').value=x.qty||0;$('productUnit').value=x.unit??'';$('productIpi').value=x.ipi??0;$('productIcms').value=x.icms??0;$('productUnitText').value=x.unitText||'';$('productObs').value=x.obs||'';if(x.photo)$('productPhotoPreview').innerHTML=`<img src="${x.photo}" alt="" onclick="openProductInfo(${x.id})">`}else{$('productModalTitle').textContent='Novo produto';$('productQty').value=1;$('productIpi').value=0;$('productIcms').value=0}$('productModal').classList.add('open')}
+$('productPhoto').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('productPhotoPreview').innerHTML=`<img src="${r.result}" alt="" onclick="zoomImage('${r.result}')">`;$('productPhotoPreview').dataset.src=r.result};r.readAsDataURL(f)});
+function saveProduct(){if(!$('productForm').reportValidity())return;const id=$('productId').value?Number($('productId').value):(Date.now()+Math.floor(Math.random()*1000));const oldCurrent=items.find(x=>x.id===id);const oldMaster=masterItems.find(x=>x.id===id);const unit=$('productUnit').value===''?null:Number($('productUnit').value);const name=$('productName').value.trim();const photo=$('productPhotoPreview').dataset.src||oldCurrent?.photo||oldMaster?.photo||'';const howTo=oldCurrent?.howTo||oldMaster?.howTo||'';const tech=oldCurrent?.tech||oldMaster?.tech||'';const category=$('productCategory')?.value?.trim()||oldCurrent?.category||oldMaster?.category||'';const quoteData={id,name,category,supplier:$('productSupplier').value,qty:num($('productQty').value),unit,ipi:num($('productIpi').value),icms:num($('productIcms').value),unitText:$('productUnitText').value.trim(),obs:$('productObs').value.trim(),photo,howTo,tech,hidden:Boolean(oldCurrent?.hidden)};const masterData={...quoteData,qty:quoteData.qty,unit:quoteData.unit,ipi:quoteData.ipi,icms:quoteData.icms,unitText:quoteData.unitText,obs:quoteData.obs,hidden:false};const mi=masterItems.findIndex(x=>x.id===id);if(mi>=0)masterItems[mi]={...masterItems[mi],name,category,supplier:quoteData.supplier,photo,howTo,tech};else masterItems.push({...masterData,hidden:false});if(activeClientId){const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=quoteData;else items.push({...masterData});saveBudget();}else{const idx=items.findIndex(x=>x.id===id);if(idx>=0)items[idx]=masterData;else items.push({...masterData});saveAll();}closeModal('productModal');refresh();toast('Produto salvo com sucesso.')}
+
+function liveUpdate(id,k,v){const x=items.find(i=>i.id===id);if(!x)return;x[k]=['qty','unit','ipi','icms'].includes(k)?num(v):v;const row=document.querySelector(`[data-product-row=\"${id}\"]`);const a=productAmounts(x);if(row){const total=row.querySelector('.live-total');if(total){total.innerHTML=`${x.unit!=null?brl(a.total):'—'}${x.unit!=null?`<div class=\"tax-detail live-breakdown\">Qtd.: ${num(x.qty)} × Unit.: ${brl(x.unit)}<br>Base: ${brl(a.base)} · IPI: ${brl(a.ipi)} · ICMS: ${brl(a.icms)}</div>`:''}`;}const ipi=row.querySelector('.live-ipi');if(ipi)ipi.textContent=brl(a.ipi);const icms=row.querySelector('.live-icms');if(icms)icms.textContent=brl(a.icms);}renderStats();}
+function quickUpdate(id,k,v){const x=items.find(i=>i.id===id);if(!x)return;x[k]=['qty','unit','ipi','icms'].includes(k)?num(v):v;if(activeClientId)saveBudget();else saveAll();renderStats();renderActiveClient();toast('Total atualizado e salvo.');}
+function hideProduct(id){setProductHidden(id,true)}
+function restoreProduct(id){setProductHidden(id,false)}
+function setProductHidden(id,hidden){
+ const idx=items.findIndex(i=>i.id===id);if(idx<0)return;
+ items[idx].hidden=Boolean(hidden);
+ if(activeClientId){
+   if(!budgets[activeClientId])budgets[activeClientId]={items:clone(masterItems),supplierFreights:{},savedAt:null};
+   budgets[activeClientId].items=clone(items);
+   budgets[activeClientId].savedAt=new Date().toISOString();
+ }
+ saveAll();
+ renderDashboard();renderProducts();renderStats();renderSupplierFreightBar();renderActiveClient();
+ toast(hidden?'Produto retirado do orçamento deste cliente.':'Produto restaurado no orçamento deste cliente.');
+}
+function renderHiddenProductsPanel(){const panel=$('hiddenProductsPanel');if(!panel)return;const hiddenItems=items.filter(x=>x.hidden);if(!showHiddenProducts){panel.classList.add('hidden');panel.innerHTML='';return;}panel.classList.remove('hidden');const title=activeClientId?'Produtos ocultos deste orçamento':'Produtos ocultos';panel.innerHTML=`<div class="hidden-products-head"><strong>🚫 ${title}</strong><span class="hidden-search-note">${hiddenItems.length} item(ns) oculto(s)</span></div>${hiddenItems.length?`<div class="hidden-products-grid">${hiddenItems.map(x=>{const s=supplierByName(x.supplier);const img=x.photo?`<img src="${x.photo}" alt="">`:`<div class="avatar">${esc((x.name||'?').slice(0,2).toUpperCase())}</div>`;return `<div class="hidden-product-card">${img}<div class="hidden-product-info"><strong>${esc(x.name)}</strong><small>${esc(x.supplier||'Sem fornecedor')}</small></div><button class="btn restore-btn" type="button" onclick="restoreProduct(${x.id})">↩ Restaurar</button></div>`}).join('')}</div>`:`<div class="empty" style="padding:22px 10px">Nenhum produto ocultado neste orçamento.</div>`}`;}
+function toggleHiddenProducts(){showHiddenProducts=!showHiddenProducts;const b=$('hiddenToggle');if(b)b.textContent=showHiddenProducts?'👁 Ocultar lista de ocultos':'👁 Ver ocultos';renderDashboard();renderProducts();renderHiddenProductsPanel();}
+function openSupplier(id=null){$('supplierForm').reset();$('supplierId').value=id||'';$('supplierPhotoPreview').innerHTML='LOGO';delete $('supplierPhotoPreview').dataset.src;if(id){const s=suppliers.find(x=>x.id===id);if(!s)return;$('supplierModalTitle').textContent='Editar fornecedor';['name','fantasy','cnpj','phone','whatsapp','email','cep','address','number','complement','neighborhood','city','state','notes'].forEach(k=>$('supplier'+k.charAt(0).toUpperCase()+k.slice(1)).value=s[k]||'');$('supplierFreight').value=s.freight??0;if(s.photo)$('supplierPhotoPreview').innerHTML=`<img src="${s.photo}" alt="">`}else{$('supplierModalTitle').textContent='Novo fornecedor';$('supplierFreight').value=0}$('supplierModal').classList.add('open')}
+$('supplierPhoto').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('supplierPhotoPreview').innerHTML=`<img src="${r.result}" alt="">`;$('supplierPhotoPreview').dataset.src=r.result};r.readAsDataURL(f)});
+function editSupplierName(id){openSupplier(id);setTimeout(()=>{const el=$('supplierName');if(el){el.focus();el.select()}},80)}
+function saveSupplier(){try{const form=$('supplierForm');if(form&&!form.reportValidity())return;const id=$('supplierId').value||('sup-'+Date.now()+'-'+Math.random().toString(36).slice(2,8));const old=suppliers.find(s=>s.id===id);const oldNames=new Set([old?.name,old?.fantasy,old?.id].filter(Boolean).map(v=>String(v).trim().toLowerCase()));const name=$('supplierName').value.trim();if(!name){toast('Informe o nome do fornecedor.');$('supplierName').focus();return}const duplicate=suppliers.find(s=>s.id!==id&&String(s.name||'').trim().toLowerCase()===name.toLowerCase());if(duplicate){toast('Já existe um fornecedor com esse nome. Edite o cadastro existente para evitar duplicidade.');return}const photo=$('supplierPhotoPreview').dataset.src||old?.photo||'';const data={id,name,fantasy:$('supplierFantasy').value.trim(),cnpj:$('supplierCnpj').value.trim(),phone:$('supplierPhone').value.trim(),whatsapp:$('supplierWhatsapp').value.trim(),email:$('supplierEmail').value.trim(),cep:$('supplierCep').value.trim(),address:$('supplierAddress').value.trim(),number:$('supplierNumber').value.trim(),complement:$('supplierComplement').value.trim(),neighborhood:$('supplierNeighborhood').value.trim(),city:$('supplierCity').value.trim(),state:$('supplierState').value.trim().toUpperCase(),notes:$('supplierNotes').value.trim(),freight:num($('supplierFreight').value),photo};const idx=suppliers.findIndex(s=>s.id===id);if(idx>=0){suppliers[idx]=data;const matchesSupplier=(value)=>value!=null&&oldNames.has(String(value).trim().toLowerCase());items.forEach(x=>{if(matchesSupplier(x.supplier))x.supplier=data.name});masterItems.forEach(x=>{if(matchesSupplier(x.supplier))x.supplier=data.name});for(const b of Object.values(budgets)){b.items=(b.items||[]).map(x=>matchesSupplier(x.supplier)?{...x,supplier:data.name}:x);if(b.supplierFreights){for(const key of Object.keys(b.supplierFreights)){if(matchesSupplier(key)){if(!Object.prototype.hasOwnProperty.call(b.supplierFreights,data.name))b.supplierFreights[data.name]=b.supplierFreights[key];delete b.supplierFreights[key]}}}}}else{suppliers.push(data)}const saved=saveAll();try{localStorage.setItem('mdo_suppliers',JSON.stringify(suppliers));}catch(e){}if(window.electronAPI?.saveAppData){try{window.electronAPI.saveAppData(JSON.stringify({version:15,savedAt:new Date().toISOString(),masterItems,budgets,suppliers,clients,activeClientId}));}catch(e){}}closeModal('supplierModal');refresh();toast(saved===false?'Fornecedor salvo nesta sessão, mas houve falha no arquivo de dados.':'Fornecedor salvo com sucesso. Produtos vinculados foram atualizados.')}catch(err){console.error(err);toast('Não foi possível salvar o fornecedor: '+(err?.message||err));}}
+function deleteSupplier(id){const s=suppliers.find(x=>x.id===id);if(!s)return;const linked=items.filter(x=>x.supplier===s.name).length;if(linked&& !confirm(`Este fornecedor possui ${linked} produto(s) vinculado(s). Excluir mesmo assim?`))return;if(!confirm('Excluir o fornecedor?'))return;suppliers=suppliers.filter(x=>x.id!==id);saveAll();refresh();toast('Fornecedor excluído.')}
+function renderClients(){const q=($('clientSearch').value||'').toLowerCase();const list=clients.filter(c=>(c.name+' '+c.fantasy+' '+c.doc+' '+c.phone+' '+c.whatsapp+' '+c.email).toLowerCase().includes(q));$('clientGrid').innerHTML=list.length?list.map(c=>`<article class="supplier-card"><div class="supplier-head">${clientAvatarHTML(c,true)}<div><h3>${esc(c.name)}</h3><small>${esc(c.fantasy||'Cliente')}</small></div></div><div class="supplier-data"><div class="data-row"><strong>CPF/CNPJ</strong><span>${esc(c.doc||'Não informado')}</span></div><div class="data-row"><strong>Telefone</strong><span>${esc(c.phone||'Não informado')}</span></div><div class="data-row"><strong>WhatsApp</strong><span>${esc(c.whatsapp||'Não informado')}</span></div><div class="data-row"><strong>E-mail</strong><span>${esc(c.email||'Não informado')}</span></div><div class="data-row"><strong>Endereço</strong><span>${esc(fullClientAddress(c)||'Não informado')}</span></div></div><div class="note" style="min-height:34px">${esc(c.notes||'')}</div><div class="actions" style="margin-top:14px"><button class="btn primary" onclick="selectClient('${c.id}')">Trabalhar com este cliente</button><button class="btn whatsapp" onclick="openClientWhatsapp('${c.id}')">💬 WhatsApp</button><button class="btn" onclick="openClient('${c.id}')">Editar ficha</button><button class="btn danger" onclick="deleteClient('${c.id}')">Excluir</button></div></article>`).join(''):'<div class="card empty" style="grid-column:1/-1">Nenhum cliente cadastrado.</div>'}
+function clientAvatarHTML(c,large=false){const size=large?'large':'';return c&&c.photo?`<img class="avatar ${size}" src="${c.photo}" alt="">`:`<div class="avatar ${size}">${esc((c?.name||'?').slice(0,2).toUpperCase())}</div>`}
+function fullClientAddress(c){return [c.address,c.number,c.complement,c.neighborhood,c.city,c.state,c.cep].filter(Boolean).join(', ')}
+function openClient(id=null){$('clientForm').reset();$('clientId').value=id||'';$('clientPhotoPreview').innerHTML='FOTO';delete $('clientPhotoPreview').dataset.src;if(id){const c=clients.find(x=>x.id===id);if(!c)return;$('clientModalTitle').textContent='Editar cliente';['name','fantasy','doc','phone','whatsapp','email','cep','address','number','complement','neighborhood','city','state','notes'].forEach(k=>$('client'+k.charAt(0).toUpperCase()+k.slice(1)).value=c[k]||'');if(c.photo)$('clientPhotoPreview').innerHTML=`<img src="${c.photo}" alt="">`}else $('clientModalTitle').textContent='Novo cliente';$('clientModal').classList.add('open')}
+$('clientPhoto').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('clientPhotoPreview').innerHTML=`<img src="${r.result}" alt="">`;$('clientPhotoPreview').dataset.src=r.result};r.readAsDataURL(f)})
+function saveClient(){
+  if(!$('clientForm').reportValidity())return;
+  const editing=Boolean($('clientId').value);
+  const id=editing?$('clientId').value:('cli-'+Date.now()+'-'+Math.random().toString(36).slice(2,8));
+  const old=clients.find(c=>c.id===id);
+  const photo=$('clientPhotoPreview').dataset.src||old?.photo||'';
+  const data={id,name:$('clientName').value.trim(),fantasy:$('clientFantasy').value.trim(),doc:$('clientDoc').value.trim(),phone:$('clientPhone').value.trim(),whatsapp:$('clientWhatsapp').value.trim(),email:$('clientEmail').value.trim(),cep:$('clientCep').value.trim(),address:$('clientAddress').value.trim(),number:$('clientNumber').value.trim(),complement:$('clientComplement').value.trim(),neighborhood:$('clientNeighborhood').value.trim(),city:$('clientCity').value.trim(),state:$('clientState').value.trim().toUpperCase(),notes:$('clientNotes').value.trim(),photo,createdAt:old?.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()};
+  const idx=clients.findIndex(c=>c.id===id);
+  if(idx>=0) clients[idx]=data; else clients.push(data);
+  saveAll();
+  $('clientForm').reset();
+  $('clientId').value='';
+  delete $('clientPhotoPreview').dataset.src;
+  $('clientPhotoPreview').innerHTML='FOTO';
+  closeModal('clientModal');
+  refresh();
+  toast(editing?'Cliente atualizado com sucesso.':'Novo cliente salvo individualmente.');
+}
+function deleteClient(id){if(!confirm('Excluir este cliente?'))return;if(activeClientId===id){activeClientId='';localStorage.removeItem('mdo_active_client')}clients=clients.filter(c=>c.id!==id);saveAll();refresh();toast('Cliente excluído.')}
+function toggleTheme(){const dark=document.body.classList.toggle('dark');localStorage.setItem('mdo_theme',dark?'dark':'light');updateThemeButton()}
+function updateThemeButton(){const dark=document.body.classList.contains('dark');$('themeToggle').textContent=dark?'☀️ Modo claro':'🌙 Modo escuro'}
+function loadTheme(){if(localStorage.getItem('mdo_theme')==='dark')document.body.classList.add('dark');updateThemeButton()}
+function getGlobalWhatsapp(){return localStorage.getItem('mdo_global_whatsapp')||''}
+function saveGlobalWhatsapp(){const raw=($('globalWhatsapp').value||'').replace(/\D/g,'');if(raw.length<10){toast('Digite um número válido com DDD.');return}localStorage.setItem('mdo_global_whatsapp',raw);$('globalWhatsapp').value=raw;renderDashboard();renderProducts();toast('WhatsApp do app salvo.')}
+async function openWhatsapp(number){let n=String(number||'').replace(/\D/g,'');if(!n){toast('Cadastre o WhatsApp deste cliente na ficha antes de usar o botão.');return}if(n.length===10||n.length===11)n='55'+n;if(n.length<12){toast('Número de WhatsApp incompleto. Verifique o DDD e o número na ficha do cliente.');return}const url='https://wa.me/'+n;if(window.electronAPI&&typeof window.electronAPI.openWhatsapp==='function'){const ok=await window.electronAPI.openWhatsapp(url);if(!ok)toast('Não foi possível abrir o WhatsApp.');}else{window.open(url,'_blank','noopener,noreferrer')}}
+function testGlobalWhatsapp(){openWhatsapp(getGlobalWhatsapp())}
+function openActiveClientWhatsapp(){if(!activeClientId){toast('Selecione um cliente em trabalho primeiro.');return}openClientWhatsapp(activeClientId)}
+function openClientWhatsapp(id){const c=clients.find(x=>String(x.id)===String(id));if(!c){toast('Cliente não encontrado.');return}const n=String(c.whatsapp||'').replace(/\D/g,'');if(!n){toast('Cadastre o WhatsApp deste cliente na ficha do cliente antes de usar este botão.');return}openWhatsapp(n)}
+function applyBgTheme(v){document.body.classList.remove('theme-sand','theme-slate','theme-blue','theme-green','theme-rose','custom-theme');if(v==='custom'){const c=localStorage.getItem('mdo_custom_color')||'#0b2fc4';applyCustomColor(c,true)} else if(v&&v!=='default'){document.body.classList.add('theme-'+v);localStorage.setItem('mdo_bg_theme',v)} else localStorage.setItem('mdo_bg_theme',v||'default')}
+function hexToRgb(hex){const h=hex.replace('#','');return {r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)}}
+function applyCustomColor(hex,silent=false){const {r,g,b}=hexToRgb(hex);const soft=`rgba(${r},${g},${b},0.12)`;const bg=`rgba(${r},${g},${b},0.055)`;const line=`rgba(${r},${g},${b},0.18)`;const ink='#172033';document.body.classList.add('custom-theme');document.documentElement.style.setProperty('--custom-accent',hex);document.documentElement.style.setProperty('--custom-soft',soft);document.documentElement.style.setProperty('--custom-bg',bg);document.documentElement.style.setProperty('--custom-surface','#fff');document.documentElement.style.setProperty('--custom-surface2',`rgba(${r},${g},${b},0.045)`);document.documentElement.style.setProperty('--custom-line',line);document.documentElement.style.setProperty('--custom-ink',ink);localStorage.setItem('mdo_bg_theme','custom');localStorage.setItem('mdo_custom_color',hex);if($('customColor'))$('customColor').value=hex;if($('customColorHex'))$('customColorHex').textContent=hex.toUpperCase();if($('bgTheme'))$('bgTheme').value='custom';if(!silent)toast('Cor personalizada aplicada ao app inteiro.')}
+function resetCustomColor(){localStorage.removeItem('mdo_custom_color');applyBgTheme('default');if($('bgTheme'))$('bgTheme').value='default';if($('customColor'))$('customColor').value='#0b2fc4';if($('customColorHex'))$('customColorHex').textContent='#0B2FC4';}
+function applyLogoSize(v){const w=Number(v)||155;document.documentElement.style.setProperty('--logoW',w+'px');document.documentElement.style.setProperty('--logoH',Math.round(w*0.387)+'px');localStorage.setItem('mdo_logo_size',String(w))}
+function loadAppearance(){const bg=localStorage.getItem('mdo_bg_theme')||'default';const size=Number(localStorage.getItem('mdo_logo_size')||155);if($('bgTheme'))$('bgTheme').value=bg;if($('logoSize'))$('logoSize').value=size;if($('customColor'))$('customColor').value=localStorage.getItem('mdo_custom_color')||'#0b2fc4';applyBgTheme(bg);applyLogoSize(size);if(bg==='custom'&&$('customColorHex'))$('customColorHex').textContent=(localStorage.getItem('mdo_custom_color')||'#0b2fc4').toUpperCase()}
+function buildBackupData(){return {version:13.1,savedAt:new Date().toISOString(),masterItems,budgets,items,suppliers,clients,activeClientId,theme:localStorage.getItem('mdo_theme')||'light',globalWhatsapp:getGlobalWhatsapp()}}
+async function saveEverything(){
+  try{
+    if(activeClientId){
+      const b=budgets[activeClientId]||{supplierFreights:{},savedAt:null};
+      b.items=clone(items);
+      b.supplierFreights=b.supplierFreights||{};
+      b.savedAt=new Date().toISOString();
+      budgets[activeClientId]=b;
+      persistCurrentState();
+    }else{
+      masterItems=clone(items).map(x=>({...x,hidden:false}));
+    }
+    const okState=saveAll();
+    if(okState===false){ toast('Houve uma falha ao salvar os dados internos.'); return; }
+    const data=JSON.stringify({
+      type:'mestre-das-tintas-backup-completo',
+      version:19.7,
+      savedAt:new Date().toISOString(),
+      masterItems:clone(masterItems),
+      budgets:clone(budgets),
+      items:clone(items),
+      suppliers:clone(suppliers),
+      clients:clone(clients),
+      activeClientId,
+      conditions:clone(conditions),
+      appearance:{
+        theme:localStorage.getItem('mdo_theme')||'light',
+        bg:localStorage.getItem('mdo_bg_theme')||'default',
+        customColor:localStorage.getItem('mdo_custom_color')||'#0b2fc4',
+        logoSize:localStorage.getItem('mdo_logo_size')||'155',
+        globalWhatsapp:getGlobalWhatsapp()
+      }
+    },null,2);
+    const filename='mestre_das_tintas_BACKUP_COMPLETO_'+new Date().toISOString().slice(0,10)+'.json';
+    if(window.electronAPI?.saveFullBackup){
+      const ok=await window.electronAPI.saveFullBackup(data,filename);
+      if(ok){
+        recordBackup();
+        toast('✅ TUDO SALVO — backup completo no local escolhido.');
+        return;
+      }
+      return;
+    }
+    if(window.showSaveFilePicker){
+      try{
+        const handle=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'Backup completo Mestre das Tintas',accept:{'application/json':['.json']}}]});
+        const writable=await handle.createWritable();
+        await writable.write(data); await writable.close();
+        recordBackup(); toast('✅ TUDO SALVO — backup completo no local escolhido.'); return;
+      }catch(e){ if(e&&e.name==='AbortError') return; }
+    }
+    const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);recordBackup();toast('Backup completo baixado.');
+  }catch(err){console.error(err);toast('Não foi possível salvar tudo: '+(err?.message||err));}
+}
+
+async function saveAsBackup(){
+  if(!activeClientId){toast('Selecione um cliente em trabalho para salvar este orçamento.');return}
+  // Sempre grava primeiro o estado atual da tela no orçamento deste cliente.
+  const b=budgets[activeClientId]||{supplierFreights:{},savedAt:null};
+  b.items=clone(items);
+  b.supplierFreights=clone(b.supplierFreights||{});
+  b.savedAt=new Date().toISOString();
+  budgets[activeClientId]=b;
+  saveAll();
+  const client=clients.find(c=>c.id===activeClientId); if(!client){toast('Cliente não encontrado.');return}
+  const payload={type:'orcamento-cliente',version:2,savedAt:b.savedAt,client,items:clone(b.items),supplierFreights:clone(b.supplierFreights||{}),theme:{bg:localStorage.getItem('mdo_bg_theme')||'default',color:localStorage.getItem('mdo_custom_color')||'#0b2fc4'},logoSize:localStorage.getItem('mdo_logo_size')||'155'};
+  const data=JSON.stringify(payload,null,2);
+  const filename='orcamento_'+String(client.name||'cliente').replace(/[^a-z0-9]+/gi,'_')+'_'+new Date().toISOString().slice(0,10)+'.json';
+  try{
+    if(window.electronAPI?.saveBudgetAs){
+      const ok=await window.electronAPI.saveBudgetAs(data,filename,client.id);
+      if(ok){toast('✅ Orçamento salvo no local escolhido.');return}
+      if(window.electronAPI?.saveAppData) window.electronAPI.saveAppData(JSON.stringify({version:15,savedAt:new Date().toISOString(),masterItems,budgets,suppliers,clients,activeClientId}));
+      return;
+    }
+  }catch(e){console.error(e)}
+  try{
+    if(window.showSaveFilePicker){
+      const handle=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'Orçamento Mestre das Tintas',accept:{'application/json':['.json']}}]});
+      const writable=await handle.createWritable();await writable.write(data);await writable.close();toast('✅ Orçamento salvo no local escolhido.');return
+    }
+  }catch(e){if(e&&e.name==='AbortError')return}
+  const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('Orçamento baixado.');
+}
+async function chooseBackupFolder(){try{if(!window.showDirectoryPicker){toast('Seu navegador não permite escolher pasta diretamente. Use Salvar como...');return}backupFolderHandle=await window.showDirectoryPicker({mode:'readwrite'});localStorage.setItem('mdo_backup_folder_name',backupFolderHandle.name||'Pasta escolhida');$('backupFolderName').textContent=backupFolderHandle.name||'Pasta escolhida';toast('Pasta de backup escolhida.')}catch(e){if(!e||e.name!=='AbortError')toast('Não foi possível escolher a pasta.')}}
+async function backupNow(){if(backupFolderHandle){try{const f=await backupFolderHandle.getFileHandle('mestre_das_tintas_auto_backup.json',{create:true});const w=await f.createWritable();await w.write(JSON.stringify(buildBackupData(),null,2));await w.close();recordBackup();toast('Backup gravado na pasta escolhida.');return}catch(e){}}await saveAsBackup()}
+function startAutoBackup(){stopAutoBackup();const min=Number($('autoBackupInterval').value);localStorage.setItem('mdo_auto_backup_interval',String(min));if(!min){toast('Backup automático desativado.');return}autoBackupTimer=setInterval(backupNow,min*60000);toast('Backup automático ativado a cada '+min+' minutos.')}
+function stopAutoBackup(){if(autoBackupTimer){clearInterval(autoBackupTimer);autoBackupTimer=null}localStorage.setItem('mdo_auto_backup_interval','0')}
+function recordBackup(){const d=new Date();localStorage.setItem('mdo_last_backup_at',d.toISOString());if($('lastBackupAt'))$('lastBackupAt').textContent=d.toLocaleString('pt-BR')}
+function loadBackupSettings(){loadAppearance();const w=getGlobalWhatsapp();if($('globalWhatsapp'))$('globalWhatsapp').value=w;const folder=localStorage.getItem('mdo_backup_folder_name');if(folder&&$('backupFolderName'))$('backupFolderName').textContent=folder;const min=localStorage.getItem('mdo_auto_backup_interval')||'0';if($('autoBackupInterval'))$('autoBackupInterval').value=min;const last=localStorage.getItem('mdo_last_backup_at');if(last&&$('lastBackupAt'))$('lastBackupAt').textContent=new Date(last).toLocaleString('pt-BR');if(Number(min)>0)startAutoBackup()}
+function zoomImage(src){$('zoomImage').src=src;$('zoomLayer').classList.add('open')}
+function closeZoom(e){if(e&&e.target&&e.target.id==='zoomImage')return;$('zoomLayer').classList.remove('open')}
+function openProductInfo(id){const x=items.find(i=>i.id==id)||masterItems.find(i=>i.id==id);if(!x)return;currentInfoProductId=id;$('productInfoModalTitle').textContent='Informações — '+x.name;$('productHowTo').value=x.howTo||'';$('productTech').value=x.tech||'';$('productInfoImage').src=x.photo||'';$('productInfoImage').alt=x.name||'Foto do equipamento';$('productInfoImage').style.display=x.photo?'block':'none';$('productInfoModal').classList.add('open')}
+function saveProductInfo(){const x=items.find(i=>i.id===currentInfoProductId);const m=masterItems.find(i=>i.id===currentInfoProductId);if(x){x.howTo=$('productHowTo').value;x.tech=$('productTech').value}if(m){m.howTo=$('productHowTo').value;m.tech=$('productTech').value}if(activeClientId)saveBudget();else saveAll();closeModal('productInfoModal');toast('Foto, como usar e dados técnicos salvos.')}
+
+function showInfo(id,type){openProductInfo(id)}
+async function exportPDF(){
+ if(!activeClientId){toast('Selecione um cliente em trabalho para exportar o orçamento.');return}
+ // Primeiro garante que o que está na tela é o que será exportado.
+ const current=budgets[activeClientId]||{supplierFreights:{},savedAt:null};
+ current.items=clone(items);
+ current.supplierFreights=clone(current.supplierFreights||{});
+ current.savedAt=new Date().toISOString();
+ budgets[activeClientId]=current;
+ saveAll();
+ const client=clients.find(c=>c.id===activeClientId);if(!client){toast('Cliente não encontrado.');return}
+ const sourceItems=Array.isArray(current.items)?current.items:[];
+ const visibleItems=sourceItems.filter(x=>!x.hidden).map(x=>({...x}));
+ const freightBySupplier={...(current.supplierFreights||{})};
+ const payload={client,items:visibleItems,supplierFreights:freightBySupplier,logoSrc:$('logo')?.src||'',title:'Orçamento e Compras',generatedAt:new Date().toISOString()};
+ if(window.electronAPI?.exportPDF){const ok=await window.electronAPI.exportPDF(payload);if(ok)toast('PDF do orçamento do cliente exportado com sucesso.');else toast('Não foi possível criar o PDF.');return}
+ const oldTab=document.querySelector('.tab.active');
+ document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+ const printSection=document.createElement('section');
+ printSection.id='__pdf_only'; printSection.className='tab active';
+ const sums=visibleItems.reduce((a,x)=>{const base=num(x.qty)*num(x.unit);const ipi=base*num(x.ipi)/100;const icms=base*num(x.icms)/100;a.base+=base;a.ipi+=ipi;a.icms+=icms;return a},{base:0,ipi:0,icms:0});
+ const freightTotal=Object.values(freightBySupplier||{}).reduce((a,v)=>a+num(v),0); const grand=sums.base+sums.ipi+sums.icms+freightTotal;
+ const rows=visibleItems.map((x,i)=>{const base=num(x.qty)*num(x.unit);const total=base+base*num(x.ipi)/100+base*num(x.icms)/100;return `<tr><td>${i+1}</td><td><strong>${esc(x.name||'')}</strong>${x.supplier?`<div class="pdf-muted">${esc(x.supplier)}</div>`:''}</td><td class="c">${num(x.qty)}</td><td class="r">${x.unit==null?'A consultar':brl(x.unit)}</td><td class="c">${num(x.ipi).toFixed(2)}%</td><td class="c">${num(x.icms).toFixed(2)}%</td><td class="r strong">${x.unit==null?'—':brl(total)}</td><td>${esc(x.obs||'')}</td></tr>`}).join('');
+ const freights=Object.entries(freightBySupplier||{}).filter(([_,v])=>num(v)>0).map(([n,v])=>`<div class="pdf-freight"><span>${esc(n)}</span><strong>${brl(v)}</strong></div>`).join('')||'<span class="pdf-muted">Nenhum frete informado.</span>';
+ printSection.innerHTML=`<div class="pdf-page"><div class="pdf-header"><div class="pdf-logo"><img src="logo-mark.png" alt="Mestre das Tintas"></div><div class="pdf-title">Orçamento e Compras</div><div class="pdf-date">${new Date().toLocaleString('pt-BR')}</div></div><div class="pdf-client"><h2>Cliente: ${esc(client.name||'')}</h2><div><b>CPF/CNPJ:</b> ${esc(client.doc||'')}</div><div><b>Telefone:</b> ${esc(client.phone||'')}</div><div><b>WhatsApp:</b> ${esc(client.whatsapp||'')}</div><div><b>E-mail:</b> ${esc(client.email||'')}</div><div class="full"><b>Endereço:</b> ${esc(fullClientAddress(client)||'')}</div></div><table class="pdf-table"><thead><tr><th>#</th><th>Produto / Equipamento</th><th>Qtd.</th><th>Preço</th><th>IPI</th><th>ICMS</th><th>Total</th><th>Observações</th></tr></thead><tbody>${rows||'<tr><td colspan="8">Nenhum item neste orçamento.</td></tr>'}</tbody></table><div class="pdf-bottom"><div class="pdf-box"><h3>Frete por fornecedor</h3>${freights}</div><div class="pdf-totals"><div><span>Subtotal</span><strong>${brl(sums.base)}</strong></div><div><span>IPI</span><strong>${brl(sums.ipi)}</strong></div><div><span>ICMS</span><strong>${brl(sums.icms)}</strong></div><div><span>Frete</span><strong>${brl(freightTotal)}</strong></div><div class="grand"><span>Total do orçamento</span><strong>${brl(grand)}</strong></div></div></div><div class="pdf-foot">App criado por Carlos Taborda</div></div>`;
+ const root=document.querySelector('main.wrap');
+ const top=document.querySelector('.top');
+ const siblings=[...root.children];
+ const hidden=[];
+ siblings.forEach(el=>{if(el!==printSection){hidden.push([el,el.style.display]);el.style.display='none'}});
+ const topOld=top?top.style.display:''; if(top)top.style.display='none';
+ root.appendChild(printSection);
+ window.print();
+ printSection.remove(); hidden.forEach(([el,v])=>el.style.display=v); if(top)top.style.display=topOld; if(oldTab)oldTab.classList.add('active');
+}
+
+let pendingImportRows=[];
+function normalizeKey(k){return String(k||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+function pickField(row,keys){const map={};Object.keys(row||{}).forEach(k=>map[normalizeKey(k)]=row[k]);for(const k of keys){const nk=normalizeKey(k);if(map[nk]!=null&&String(map[nk]).trim()!=='')return map[nk]}return ''}
+function pickFieldAny(row,keys){const v=pickField(row,keys);return v}
+function cleanNum(v){if(v==null||v==='')return 0;if(typeof v==='number')return Number.isFinite(v)?v:0;let s=String(v).trim().replace(/R\$\s?/gi,'').replace(/\s/g,'');if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'');}else if(s.includes(','))s=s.replace(/\./g,'').replace(',','.');s=s.replace(/[^0-9.\-]/g,'');const x=parseFloat(s);return Number.isFinite(x)?x:0}
+function yes(v){return /^(sim|yes|true|1|x)$/i.test(String(v||'').trim())}
+async function chooseExcelFile(){if(window.electronAPI?.importExcel){await importExcel();return}const input=$('excelFallbackInput');if(input){input.value='';input.click()}else{toast('Não foi possível abrir o seletor de arquivos.')}}
+let browserXlsxPromise=null;
+function normalizeImportHeaderKey(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+const importHeaderHints=['produto','item','descricao','nome do produto','material','equipamento','fornecedor','fabricante','marca','nome fornecedor','razao social','cliente','nome cliente','categoria','quantidade','qtd','preco','valor','valor unitario','preco unitario','ipi','icms','frete','cnpj','telefone','whatsapp','email','condicao','observacao','detalhes','endereco'];
+function findImportHeaderRowBrowser(matrix){let best=-1,scoreBest=0;for(let i=0;i<Math.min(matrix.length,30);i++){const cells=(matrix[i]||[]).map(normalizeImportHeaderKey).filter(Boolean);if(!cells.length)continue;let score=0;for(const cell of cells)if(importHeaderHints.some(h=>cell===h||cell.includes(h)||h.includes(cell)))score++;if(score>scoreBest){scoreBest=score;best=i}}if(scoreBest>=1)return best;return matrix.findIndex(r=>(r||[]).some(v=>String(v??'').trim()!==''))}
+function matrixToImportRowsBrowser(matrix,sheetName){const headerIndex=findImportHeaderRowBrowser(matrix||[]);if(headerIndex<0)return[];const rawHeaders=matrix[headerIndex]||[];const used={};const headers=rawHeaders.map((v,i)=>{let h=String(v??'').trim()||`Coluna ${i+1}`;used[h]=(used[h]||0)+1;return used[h]>1?`${h} ${used[h]}`:h});const out=[];for(let i=headerIndex+1;i<matrix.length;i++){const arr=matrix[i]||[];if(!arr.some(v=>String(v??'').trim()!==''))continue;const row={};headers.forEach((h,c)=>row[h]=arr[c]??'');if(Object.values(row).some(v=>String(v??'').trim()!==''))out.push({sheet:sheetName,row})}return out}
+function loadBrowserXlsx(){
+ if(window.XLSX) return Promise.resolve(window.XLSX);
+ if(browserXlsxPromise) return browserXlsxPromise;
+ browserXlsxPromise=new Promise((resolve,reject)=>{
+   const script=document.createElement('script');
+   script.src='https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js';
+   script.async=true;
+   script.onload=()=>window.XLSX?resolve(window.XLSX):reject(new Error('A biblioteca Excel foi carregada, mas não ficou disponível.'));
+   script.onerror=()=>reject(new Error('Não foi possível carregar o leitor Excel no navegador. Abra o aplicativo Windows para usar a importação sem internet.'));
+   document.head.appendChild(script);
+ });
+ return browserXlsxPromise;
+}
+async function handleExcelFallback(input){
+ const file=input?.files?.[0]; if(!file)return;
+ try{
+   const name=String(file.name||'').toLowerCase();
+   let rows=[];
+   if(name.endsWith('.csv')){
+     rows=parseCsvText(await file.text()).map(row=>({sheet:'CSV',row}));
+   }else if(/\.(xlsx|xls|xlsb|xlsm)$/i.test(name)){
+     const XLSXLib=await loadBrowserXlsx();
+     const buffer=await file.arrayBuffer();
+     const wb=XLSXLib.read(buffer,{type:'array',cellDates:true,raw:false});
+     for(const sheetName of wb.SheetNames){
+       const ws=wb.Sheets[sheetName];
+       rows.push(...matrixToImportRowsBrowser(XLSXLib.utils.sheet_to_json(ws,{header:1,defval:'',blankrows:false}),sheetName));
+     }
+   }else{toast('Formato não suportado. Escolha .xlsx, .xls, .xlsm, .xlsb ou .csv.');return}
+   pendingImportRows=rows;
+   if(!pendingImportRows.length){toast('Nenhum dado encontrado na planilha.');return}
+   renderImportPreview();openModal('importModal');
+ }catch(err){console.error('Falha na importação pelo navegador:',err);toast('Erro ao ler a planilha: '+(err?.message||err))}
+}
+function parseCsvText(text){
+ const rows=[];let row=[],field='',quoted=false;const pushField=()=>{row.push(field);field=''};const pushRow=()=>{if(row.some(v=>String(v).trim()!==''))rows.push(row);row=[]};const source=String(text||'').replace(/^\uFEFF/,'');
+ for(let i=0;i<source.length;i++){const ch=source[i];if(quoted){if(ch==='"'&&source[i+1]==='"'){field+='"';i++}else if(ch==='"')quoted=false;else field+=ch}else if(ch==='"')quoted=true;else if(ch===','||ch===';'||ch==='\t')pushField();else if(ch==='\n'){pushField();pushRow()}else if(ch==='\r'){}else field+=ch}
+ if(field!==''||row.length){pushField();pushRow()}if(!rows.length)return[];const headers=rows.shift().map((h,i)=>String(h||'').trim()||`Coluna ${i+1}`);return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,r[i]??''])));
+}
+async function importExcel(){if(!window.electronAPI?.importExcel){const input=$('excelFallbackInput');if(input){input.value='';input.click();}else toast('A importação Excel completa está disponível na versão Windows instalada.');return}const result=await window.electronAPI.importExcel();if(result?.canceled)return;if(result?.error){toast('Erro ao importar: '+result.error);return}pendingImportRows=(result.rows||[]).map(x=>({sheet:x.sheet,row:x.row}));if(!pendingImportRows.length){toast('Nenhum dado encontrado na planilha.');return}renderImportPreview();openModal('importModal')}
+function hasImportField(row,keys){return keys.some(k=>Object.keys(row||{}).some(existing=>normalizeKey(existing)===normalizeKey(k)))}
+function sheetKind(sheet){const n=normalizeKey(sheet);if(/fornecedor|supplier|fabricante/.test(n))return'fornecedor';if(/cliente|customer/.test(n))return'cliente';if(/produto|item|material|equipamento|orcamento|orçamento/.test(n))return'produto';return''}
+function inferRow(x){
+ const r=x.row||{}, kind=sheetKind(x.sheet);
+ let name=String(pickField(r,['produto','produto equipamento','produto item','item','descricao produto','descrição produto','descricao','descrição','nome do produto','material','equipamento'])).trim();
+ let supplier=String(pickField(r,['fornecedor','fornecedora','nome fornecedor','fornecedor nome','fabricante','marca','supplier'])).trim();
+ const genericName=String(pickField(r,['nome','nome completo','razao social','razão social','empresa','nome fantasia'])).trim();
+ if(kind==='fornecedor'&&!supplier)supplier=genericName;
+ if(kind==='produto'&&!name)name=genericName;
+ if(kind==='cliente'&&!name)name='';
+ const client=String(pickField(r,['cliente','cliente nome','nome cliente','cliente final','customer'])).trim();
+ const category=String(pickField(r,['categoria','category','grupo','tipo','segmento'])).trim();
+ const details=String(pickField(r,['detalhes','detalhe','details','especificacao','especificação','dados tecnicos','dados técnicos','observacoes tecnicas'])).trim();
+ const qty=pickFieldAny(r,['quantidade','qtd','qtd.','qtde','quant']);
+ const unit=pickFieldAny(r,['valor unitario','valor unitário','preco unitario','preço unitário','preco','preço','valor','valor unit','valor do item','preço venda']);
+ const ipi=pickFieldAny(r,['ipi','ipi %','ipi percentual','ipi porcentagem']);
+ const icms=pickFieldAny(r,['icms','icms %','icms percentual','icms porcentagem']);
+ const condition=String(pickField(r,['condicao','condição','condicoes','condições','forma de pagamento','pagamento','condicao comercial','condição comercial'])).trim();
+ const obs=String(pickField(r,['observacao','observação','observacoes','observações','obs','comentario','comentário','notas','nota'])).trim();
+ const freight=pickFieldAny(r,['frete','frete fornecedor','valor frete']);
+ const supplierDoc=String(pickField(r,['cnpj fornecedor','cnpj','fornecedor cnpj','documento fornecedor'])).trim();
+ const supplierPhone=String(pickField(r,['telefone fornecedor','telefone','fone','celular'])).trim();
+ const supplierWhatsapp=String(pickField(r,['whatsapp fornecedor','whatsapp','celular whatsapp'])).trim();
+ const supplierEmail=String(pickField(r,['email fornecedor','e mail fornecedor','email','e-mail'])).trim();
+ const clientDoc=String(pickField(r,['cpf cnpj','cpf/cnpj','cnpj cliente','cpf cliente','documento cliente'])).trim();
+ const clientPhone=String(pickField(r,['telefone cliente','fone cliente','telefone','celular'])).trim();
+ const clientWhatsapp=String(pickField(r,['whatsapp cliente','cliente whatsapp','whatsapp'])).trim();
+ const clientEmail=String(pickField(r,['email cliente','cliente email','e-mail','email'])).trim();
+ const clientAddress=String(pickField(r,['endereco cliente','endereço cliente','endereco','endereço','logradouro'])).trim();
+ // Se a aba for de fornecedores, nunca transformar o nome do fornecedor em produto.
+ if(kind==='fornecedor')name='';
+ return {sheet:x.sheet,name,supplier,client,category,details,qty,unit,ipi,icms,condition,obs,freight,supplierDoc,supplierPhone,supplierWhatsapp,supplierEmail,clientDoc,clientPhone,clientWhatsapp,clientEmail,clientAddress,row:r,kind};
+}
+function renderImportPreview(){
+ const mapped=pendingImportRows.map(inferRow);
+ const good=mapped.filter(x=>x.name||x.client||x.supplier);
+ const unmapped=pendingImportRows.length-good.length;
+ const clientsN=new Set(mapped.map(x=>x.client).filter(Boolean)).size;
+ const suppliersN=new Set(mapped.map(x=>x.supplier).filter(Boolean)).size;
+ const productsN=new Set(mapped.map(x=>x.name).filter(Boolean)).size;
+ $('importModalBody').innerHTML=`<div class="note"><strong>${pendingImportRows.length}</strong> linhas encontradas em <strong>${new Set(pendingImportRows.map(x=>x.sheet)).size}</strong> abas. O importador vai separar automaticamente clientes, fornecedores, produtos e orçamentos.</div>
+ <div class="stats" style="margin-top:12px"><div class="stat"><small>Clientes encontrados</small><strong>${clientsN}</strong></div><div class="stat"><small>Fornecedores</small><strong>${suppliersN}</strong></div><div class="stat"><small>Produtos / itens</small><strong>${productsN}</strong></div></div>
+ <div class="import-preview" style="margin-top:12px"><table><thead><tr><th>Aba</th><th>Cliente</th><th>Produto</th><th>Categoria</th><th>Fornecedor</th><th>Qtd.</th><th>Preço</th><th>IPI</th><th>ICMS</th><th>Frete</th><th>Condição</th><th>Observações / detalhes</th></tr></thead><tbody>${good.slice(0,100).map(x=>`<tr><td>${esc(x.sheet)}</td><td>${esc(x.client)}</td><td>${esc(x.name)}</td><td>${esc(x.category)}</td><td>${esc(x.supplier)}</td><td>${esc(x.qty)}</td><td>${esc(x.unit)}</td><td>${esc(x.ipi)}</td><td>${esc(x.icms)}</td><td>${esc(x.freight)}</td><td>${esc(x.condition)}</td><td>${esc([x.details,x.obs].filter(Boolean).join(' · '))}</td></tr>`).join('')}</tbody></table></div>
+ <div class="note" style="margin-top:12px">${unmapped?`<strong>Atenção:</strong> ${unmapped} linha(s) não tiveram colunas reconhecidas e serão ignoradas. Revise os cabeçalhos da planilha.`:''}</div><div class="note" style="margin-top:12px">A importação preserva o que já existe. Quando houver cliente na planilha, os itens serão colocados no orçamento daquele cliente; sem cliente, entram na base mãe. CNPJ, telefones, WhatsApp, e-mail e endereço serão usados nas fichas correspondentes quando estiverem presentes.</div>`;
+ const btn=$('confirmImportBtn'); if(btn)btn.disabled=!good.length;
+ const status=$('importStatus'); if(status)status.textContent=`${pendingImportRows.length} linha(s) carregada(s). Revise a prévia e clique em “Importar dados”.`;
+}
+function ensureSupplierByRow(x){
+ let sup=suppliers.find(s=>String(s.name||'').trim().toLowerCase()===x.supplier.toLowerCase());
+ if(!sup){sup={createdByImport:true,id:'sup-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),name:x.supplier,fantasy:x.supplier,cnpj:x.supplierDoc,phone:x.supplierPhone,whatsapp:x.supplierWhatsapp,email:x.supplierEmail,cep:'',address:'',number:'',complement:'',neighborhood:'',city:'',state:'',notes:'Importado do Excel.',photo:'',freight:0};suppliers.push(sup)}
+ else{if(x.supplierDoc)sup.cnpj=x.supplierDoc;if(x.supplierPhone)sup.phone=x.supplierPhone;if(x.supplierWhatsapp)sup.whatsapp=x.supplierWhatsapp;if(x.supplierEmail)sup.email=x.supplierEmail}
+ return sup
+}
+function ensureClientByRow(x){
+ let client=clients.find(c=>String(c.name||'').trim().toLowerCase()===x.client.toLowerCase());
+ if(!client){client={id:'cli-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),name:x.client,doc:x.clientDoc,phone:x.clientPhone,whatsapp:x.clientWhatsapp,email:x.clientEmail,address:x.clientAddress,number:'',complement:'',neighborhood:'',city:'',state:'',notes:'Importado do Excel.',photo:''};clients.push(client)}
+ else{if(x.clientDoc)client.doc=x.clientDoc;if(x.clientPhone)client.phone=x.clientPhone;if(x.clientWhatsapp)client.whatsapp=x.clientWhatsapp;if(x.clientEmail)client.email=x.clientEmail;if(x.clientAddress)client.address=x.clientAddress}
+ if(!budgets[client.id])budgets[client.id]={items:[],supplierFreights:{},savedAt:null}
+ return client
+}
+function confirmImport(){
+ if(!Array.isArray(pendingImportRows)||!pendingImportRows.length){toast('Nenhum dado pendente para importar.');return}
+ let addedP=0,updatedP=0,addedS=0,addedC=0,skipped=0;
+ for(const raw of pendingImportRows){
+   const x=inferRow(raw); if(!x.name&&!x.client&&!x.supplier&&!x.category&&!x.details){skipped++;continue;}
+   let sup=null; if(x.supplier)sup=ensureSupplierByRow(x);
+   if(sup && sup.createdByImport && sup._countedImport!==true){sup._countedImport=true;addedS++;}
+   let targetClientId='';
+   if(x.client){
+     const before=clients.length; const c=ensureClientByRow(x); if(clients.length>before)addedC++;
+     targetClientId=c.id;
+   } else if(activeClientId){
+     // Quando o usuário já escolheu um cliente para trabalhar, uma planilha de orçamento sem coluna Cliente entra nesse orçamento.
+     targetClientId=activeClientId;
+   }
+   if(!x.name)continue;
+   const prodData={
+     name:x.name,
+     supplier:sup?.name||x.supplier||'',
+     qty:x.qty===''?0:cleanNum(x.qty),
+     unit:x.unit===''?null:cleanNum(x.unit),
+     ipi:cleanNum(x.ipi),
+     icms:cleanNum(x.icms),
+     unitText:x.condition,
+     obs:[x.obs].filter(Boolean).join(' · '),
+     category:x.category,
+     details:x.details,
+     photo:'',
+     howTo:'',
+     tech:x.details,
+     hidden:false,
+     whatsapp:sup?.whatsapp||''
+   };
+   let prod=masterItems.find(p=>String(p.name||'').trim().toLowerCase()===x.name.toLowerCase() && (!prodData.supplier || String(p.supplier||'').trim().toLowerCase()===prodData.supplier.toLowerCase()));
+   if(!prod){prod={id:Date.now()+Math.floor(Math.random()*100000),...prodData};masterItems.push(prod);addedP++}
+   else{Object.assign(prod,{...prodData,id:prod.id,name:prod.name});updatedP++;}
+
+   if(targetClientId){
+     const b=budgets[targetClientId]||(budgets[targetClientId]={items:[],supplierFreights:{},savedAt:null});
+     const existing=b.items.find(p=>p.id===prod.id);
+     const budgetItem={...prod,id:prod.id};
+     if(existing)Object.assign(existing,budgetItem);else b.items.push(budgetItem);
+     if(x.freight!=='' && sup) b.supplierFreights[sup.name]=cleanNum(x.freight);
+     if(activeClientId===targetClientId) items=clone(b.items);
+   }else{
+     const existing=items.find(p=>p.id===prod.id);
+     if(existing)Object.assign(existing,prod);else items.push({...prod});
+   }
+ }
+ suppliers.forEach(s=>{delete s._countedImport;delete s.createdByImport});
+ saveAll();
+ pendingImportRows=[]; closeModal('importModal'); populateSupplierSelects(); populateClientSelector(); refresh();
+ toast(`Importação concluída: ${addedP} produtos novos, ${updatedP} atualizados, ${addedS} fornecedores novos, ${addedC} clientes novos${skipped?`, ${skipped} linhas ignoradas`:''}.`)
+}
+function clearImportPreview(){pendingImportRows=[];if($('importModalBody'))$('importModalBody').innerHTML='';if($('importPreview'))$('importPreview').innerHTML='';if($('importMapping'))$('importMapping').innerHTML='';}
+function toast(msg){const el=$('toast');if(!el){console.warn('Toast element ausente:',msg);return}el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
+$('search').oninput=renderDashboard;$('supplierFilter').onchange=renderDashboard;$('homeClientSearch').oninput=renderHomeClients;$('productSearch').oninput=renderProducts;$('productSupplierFilter').onchange=renderProducts;$('supplierSearch').oninput=renderSuppliers;$('clientSearch').oninput=renderClients;$('activeClientSelect').onchange=e=>e.target.value?selectClient(e.target.value):clearActiveClient();
+document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+renderConditions();populateSupplierSelects();populateClientSelector();renderDashboard();renderProducts();renderSuppliers();renderClients();renderHomeClients();renderStats();renderHiddenProductsPanel();loadTheme();loadBackupSettings();
+</script>
+</body></html>

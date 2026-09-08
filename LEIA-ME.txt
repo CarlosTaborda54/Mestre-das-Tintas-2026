@@ -1,0 +1,6 @@
+MESTRE DAS TINTAS - v9.1
+
+Aplicacao web: pasta app/index.html
+Windows: pasta windows/
+
+A versao Windows foi corrigida para manter o app e o main.js dentro do mesmo projeto Electron, usar o icone personalizado e gerar instalador + EXE portatil x64.
